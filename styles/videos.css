@@ -1,0 +1,832 @@
+/* ============================================
+   VIDEOS PAGE - SPECIFIC STYLES
+   ============================================
+   Estilos exclusivos para videos.html.
+   Los estilos compartidos (header, footer, reset, etc.)
+   se heredan de estilos.css
+   ============================================ */
+
+/* ============================================
+   HERO SECTION OVERRIDES (Videos Page)
+   ============================================ */
+.hero-gallery-videos {
+    position: relative;
+    min-height: 420px;
+    margin-top: 90px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #052B52 0%, #0A3D6D 40%, #065577 100%);
+}
+
+.hero-gallery-videos .hero-gallery-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-gallery-videos .hero-gallery-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.15;
+}
+
+.hero-gallery-videos .hero-gallery-overlay {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(5, 43, 82, 0.88) 0%, rgba(10, 61, 109, 0.7) 100%);
+    z-index: 2;
+}
+
+.hero-gallery-videos .hero-gallery-content {
+    position: relative;
+    z-index: 3;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 420px;
+    gap: 40px;
+}
+
+.hero-gallery-videos .hero-gallery-text {
+    max-width: 550px;
+}
+
+.hero-gallery-videos .hero-gallery-icon {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.hero-gallery-videos .hero-gallery-icon .icon-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-gallery-videos .hero-gallery-icon .icon-circle svg {
+    width: 24px;
+    height: 24px;
+    color: var(--white);
+}
+
+.hero-gallery-videos .hero-gallery-icon h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 1.1;
+    color: var(--white);
+}
+
+.hero-gallery-videos .hero-gallery-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--yellow-dark, #F2B632);
+    margin-bottom: 16px;
+}
+
+.hero-gallery-videos .hero-gallery-description {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.7;
+    max-width: 420px;
+}
+
+.hero-gallery-videos .hero-gallery-image {
+    max-width: 500px;
+    border-radius: var(--radius-xl, 20px);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    flex-shrink: 0;
+}
+
+.hero-gallery-videos .hero-gallery-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ============================================
+   WAVE SEPARATOR
+   ============================================ */
+.wave-separator {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    overflow: hidden;
+    margin-top: -2px;
+}
+
+.wave-separator svg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+}
+
+/* ============================================
+   UPLOAD SECTION (Videos Page - Override)
+   ============================================ */
+.upload-section-videos {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.upload-card-videos {
+    background: var(--white);
+    border-radius: var(--radius-xl, 20px);
+    box-shadow: var(--shadow-lg);
+    padding: 36px;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+}
+
+.upload-card-videos .upload-intro {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.upload-card-videos .upload-icon-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--blue-celeste, #12B5D0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-bottom: 0;
+}
+
+.upload-card-videos .upload-icon-circle svg {
+    width: 36px;
+    height: 36px;
+    color: var(--white);
+}
+
+.upload-card-videos .upload-intro-text h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--blue-dark);
+    margin-bottom: 4px;
+}
+
+.upload-card-videos .upload-intro-text p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--gray-text);
+    line-height: 1.5;
+}
+
+.upload-btn-card {
+    border: 2px solid #D7E6F2;
+    border-radius: var(--radius-md, 14px);
+    height: 92px;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.upload-btn-card:hover {
+    border-color: var(--blue-bright);
+    background: #F0F8FC;
+    transform: translateY(-2px);
+}
+
+.upload-btn-card .upload-btn-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--blue-dark);
+}
+
+.upload-btn-card .btn-main-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--blue-dark);
+}
+
+.upload-btn-card .btn-sub-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--gray-text);
+}
+
+.upload-divider {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: #9CA3AF;
+    padding: 0 8px;
+}
+
+.upload-link-card {
+    border: 2px solid #D7E6F2;
+    border-radius: var(--radius-md, 14px);
+    height: 92px;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.upload-link-card:hover {
+    border-color: var(--blue-bright);
+    background: #F0F8FC;
+    transform: translateY(-2px);
+}
+
+.upload-link-card .link-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--blue-bright);
+}
+
+.upload-link-card .btn-main-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--blue-dark);
+}
+
+.upload-link-card .btn-sub-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--gray-text);
+}
+
+/* ============================================
+   FILTERS BAR (Videos Page - Override)
+   ============================================ */
+.filters-section-videos {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 24px;
+}
+
+.filters-section-videos .filters-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    padding: 12px 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #DCE5EC;
+}
+
+/* ============================================
+   VIDEOS GRID
+   ============================================ */
+.videos-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+}
+
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.video-card {
+    background: var(--white);
+    border-radius: var(--radius-lg, 18px);
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+}
+
+.video-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-xl);
+}
+
+.video-thumbnail {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.video-card:hover .video-thumbnail img {
+    transform: scale(1.03);
+}
+
+.video-play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.video-card:hover .video-play-overlay {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.play-button {
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.video-card:hover .play-button {
+    background: rgba(255, 255, 255, 0.35);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.play-button svg {
+    width: 28px;
+    height: 28px;
+    color: var(--white);
+    margin-left: 4px;
+}
+
+.video-duration {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.75);
+    color: var(--white);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.video-content {
+    padding: 18px;
+}
+
+.video-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--blue-dark);
+    margin-bottom: 8px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.video-meta {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--gray-text);
+    margin-bottom: 12px;
+}
+
+.video-meta .author {
+    font-weight: 500;
+}
+
+.video-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid var(--gray-border);
+}
+
+.video-reactions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.reaction-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--gray-text);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.reaction-item.like {
+    color: #ef4444;
+}
+
+.reaction-item.like:hover {
+    color: #dc2626;
+}
+
+.reaction-item.comment:hover {
+    color: var(--blue-bright);
+}
+
+.reaction-item svg {
+    width: 16px;
+    height: 16px;
+}
+
+.video-menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--gray-text);
+    transition: var(--transition);
+}
+
+.video-menu-btn:hover {
+    color: var(--blue-dark);
+}
+
+.video-menu-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ============================================
+   LOAD MORE BUTTON
+   ============================================ */
+.load-more-section {
+    text-align: center;
+    padding: 0 20px 40px;
+}
+
+.btn-load-more-videos {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--white);
+    border: 2px solid var(--blue-dark);
+    color: var(--blue-dark);
+    height: 56px;
+    padding: 0 28px;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-load-more-videos:hover {
+    background: var(--blue-dark);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(10, 61, 109, 0.3);
+}
+
+.btn-load-more-videos svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ============================================
+   BENEFITS SECTION (Videos Page)
+   ============================================ */
+.benefits-section-videos {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 50px;
+}
+
+.benefits-card-videos {
+    background: var(--white);
+    border-radius: var(--radius-xl, 20px);
+    padding: 36px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    border: 1px solid #DCE5EC;
+    box-shadow: var(--shadow-sm);
+}
+
+.benefits-card-videos .benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.benefits-card-videos .benefit-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--blue-celeste, #12B5D0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.benefits-card-videos .benefit-icon svg {
+    width: 30px;
+    height: 30px;
+    color: var(--white);
+}
+
+.benefits-card-videos .benefit-text h4 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--blue-dark);
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.benefits-card-videos .benefit-text p {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--gray-text);
+    line-height: 1.5;
+}
+
+/* ============================================
+   VIDEO MODAL
+   ============================================ */
+.video-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-modal.active {
+    display: flex;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 900px;
+    width: 90%;
+    background: #000;
+    border-radius: var(--radius-lg, 18px);
+    overflow: hidden;
+}
+
+.modal-video-container {
+    position: relative;
+    padding-top: 56.25%;
+}
+
+.modal-video-container iframe,
+.modal-video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.modal-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 32px;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    color: var(--yellow-dark, #F2B632);
+}
+
+/* Spin animation for loading spinner */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - VIDEOS PAGE
+   ============================================ */
+@media (max-width: 1024px) {
+    .hero-gallery-videos .hero-gallery-content {
+        padding: 40px 24px;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-gallery-videos .hero-gallery-text {
+        max-width: 100%;
+    }
+
+    .hero-gallery-videos .hero-gallery-icon {
+        justify-content: center;
+    }
+
+    .hero-gallery-videos .hero-gallery-icon h1 {
+        font-size: 40px;
+    }
+
+    .hero-gallery-videos .hero-gallery-description {
+        max-width: 100%;
+    }
+
+    .hero-gallery-videos .hero-gallery-image {
+        max-width: 100%;
+    }
+
+    .upload-card-videos {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .upload-card-videos .upload-intro {
+        grid-column: 1 / -1;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .upload-divider {
+        display: none;
+    }
+
+    .videos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .benefits-card-videos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-gallery-videos {
+        margin-top: 70px;
+        min-height: auto;
+    }
+
+    .hero-gallery-videos .hero-gallery-content {
+        padding: 30px 20px;
+    }
+
+    .hero-gallery-videos .hero-gallery-icon h1 {
+        font-size: 32px;
+    }
+
+    .hero-gallery-videos .hero-gallery-icon .icon-circle {
+        width: 40px;
+        height: 40px;
+    }
+
+    .hero-gallery-videos .hero-gallery-subtitle {
+        font-size: 16px;
+    }
+
+    .hero-gallery-videos .hero-gallery-description {
+        font-size: 14px;
+    }
+
+    .hero-gallery-videos .hero-gallery-image {
+        display: none;
+    }
+
+    .upload-section-videos {
+        padding: 24px 16px;
+    }
+
+    .upload-card-videos {
+        grid-template-columns: 1fr;
+        padding: 24px;
+    }
+
+    .upload-card-videos .upload-intro {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .filters-section-videos .filters-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px;
+    }
+
+    .filters-section-videos .filter-search {
+        min-width: 100%;
+    }
+
+    .filters-section-videos .filter-select {
+        width: 100%;
+    }
+
+    .filters-section-videos .view-toggle {
+        margin-left: 0;
+        justify-content: center;
+    }
+
+    .videos-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .video-thumbnail {
+        height: 220px;
+    }
+
+    .benefits-section-videos {
+        padding: 0 16px 40px;
+    }
+
+    .benefits-card-videos {
+        grid-template-columns: 1fr;
+        padding: 24px;
+    }
+
+    .benefits-card-videos .benefit-item {
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-gallery-videos .hero-gallery-icon h1 {
+        font-size: 26px;
+    }
+
+    .hero-gallery-videos .hero-gallery-subtitle {
+        font-size: 14px;
+    }
+
+    .video-thumbnail {
+        height: 200px;
+    }
+
+    .play-button {
+        width: 60px;
+        height: 60px;
+    }
+
+    .play-button svg {
+        width: 24px;
+        height: 24px;
+    }
+}
