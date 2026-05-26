@@ -825,3 +825,75 @@
                 });
             }
         })();
+
+        // ============================================
+        // LIVE VIDEO MODAL ("EN VIVO")
+        // ============================================
+        (function () {
+            'use strict';
+            
+            var liveVideoModal = document.getElementById('liveVideoModal');
+            var liveYoutubePlayer = document.getElementById('liveYoutubePlayer');
+            var closeLiveModal = document.getElementById('closeLiveModal');
+            var liveModalOverlay = document.getElementById('liveModalOverlay');
+            var liveLinks = document.querySelectorAll('.live-link');
+            
+            // Live Video URL (with autoplay parameter)
+            var liveVideoSrc = "https://www.youtube.com/embed/4qXOCUMqiNU?autoplay=1";
+
+            function openModal(e) {
+                if (e) e.preventDefault();
+                if (!liveVideoModal || !liveYoutubePlayer) return;
+                
+                // Set YouTube URL with autoplay
+                liveYoutubePlayer.setAttribute('src', liveVideoSrc);
+                
+                // Show modal with animation
+                liveVideoModal.style.display = 'flex';
+                // Trigger transition reflow
+                liveVideoModal.offsetHeight; 
+                liveVideoModal.classList.add('active');
+                
+                // Disable background scrolling
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                if (!liveVideoModal || !liveYoutubePlayer) return;
+                
+                // Remove active class to trigger fadeout/scale down
+                liveVideoModal.classList.remove('active');
+                
+                // Wait for the transition to finish before hiding the display and clearing the src
+                setTimeout(function () {
+                    liveVideoModal.style.display = 'none';
+                    // CRITICAL: Clear the iframe src to stop the YouTube video playing immediately
+                    liveYoutubePlayer.setAttribute('src', '');
+                }, 400); // matches the 0.4s transition defined in CSS
+                
+                // Restore scrolling
+                document.body.style.overflow = 'auto';
+            }
+
+            // Attach event listeners to all 'En Vivo' links
+            liveLinks.forEach(function (link) {
+                link.addEventListener('click', openModal);
+            });
+
+            // Close modal on close button click
+            if (closeLiveModal) {
+                closeLiveModal.addEventListener('click', closeModal);
+            }
+
+            // Close modal on background overlay click
+            if (liveModalOverlay) {
+                liveModalOverlay.addEventListener('click', closeModal);
+            }
+
+            // Close modal on Escape key press
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && liveVideoModal && liveVideoModal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        })();

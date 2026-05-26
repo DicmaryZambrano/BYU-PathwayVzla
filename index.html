@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -80,7 +80,7 @@
         <a href="agenda.html">Agenda</a>
         <a href="mensajes.html">Mensajes</a>
         <a href="info.html">Acerca de</a>
-        <a href="#">En Vivo</a>
+        <a href="#" class="live-link">En Vivo</a>
         <a href="#" style="background: var(--blue-dark); color: white; text-align: center; margin-top: 10px;">
             Subir Contenido â†‘
         </a>
@@ -642,6 +642,26 @@
             <p>© 2024 BYU-Pathway Worldwide. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <!-- MODAL EN VIVO (LIVE MODAL) -->
+    <div id="liveVideoModal" class="live-video-modal" role="dialog" aria-labelledby="liveModalTitle" aria-hidden="true">
+        <div class="live-modal-overlay" id="liveModalOverlay"></div>
+        <div class="live-modal-container">
+            <button class="live-modal-close" id="closeLiveModal" aria-label="Cerrar modal">&times;</button>
+            <div class="live-modal-body">
+                <h3 id="liveModalTitle" class="live-modal-title">Transmisión en Vivo</h3>
+                <div class="live-video-aspect-ratio">
+                    <iframe 
+                        id="liveYoutubePlayer"
+                        src="" 
+                        title="Transmisión en Vivo - BYU Pathway Venezuela"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="scripts/animaciones.js"></script>
 </body>
