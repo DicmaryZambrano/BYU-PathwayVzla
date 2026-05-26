@@ -5,6 +5,7 @@ let messages = [
         location: "Caracas, Venezuela",
         text: "¡Felicidades a todos los graduados! Su dedicación y esfuerzo son un ejemplo para todos.",
         likes: 24,
+        likedBy: [],
         avatar: "https://i.pravatar.cc/150?img=1",
         createdAt: new Date(Date.now() - 60 * 60 * 1000).toISOString()
     },
@@ -14,6 +15,7 @@ let messages = [
         location: "Maracaibo, Venezuela",
         text: "Dios los bendiga en esta nueva etapa. ¡Mucho éxito en todo lo que viene!",
         likes: 18,
+        likedBy: [],
         avatar: "https://i.pravatar.cc/150?img=2",
         createdAt: new Date(Date.now() - 60 * 60 * 1000).toISOString()
     },
@@ -23,6 +25,7 @@ let messages = [
         location: "Valencia, Venezuela",
         text: "Estamos muy orgullosos de ustedes! Este es solo el comienzo de cosas increíbles.",
         likes: 31,
+        likedBy: [],
         avatar: "https://i.pravatar.cc/150?img=3",
         createdAt: new Date(Date.now() - 60 * 60 * 1000).toISOString()
     },
@@ -32,6 +35,7 @@ let messages = [
         location: "Barquisimeto, Venezuela",
         text: "¡Felicitaciones a todos los graduados! Su esfuerzo y dedicación son inspiradoras.",
         likes: 15,
+        likedBy: [],
         avatar: "https://i.pravatar.cc/150?img=4",
         createdAt: new Date(Date.now() - 60 * 60 * 1000).toISOString()
     },
@@ -41,6 +45,7 @@ let messages = [
         location: "Maracaibo, Venezuela",
         text: "¡Felicidades a todos los graduados! Su esfuerzo y dedicación son inspiradoras.",
         likes: 22,
+        likedBy: [],
         avatar: "https://i.pravatar.cc/150?img=5",
         createdAt: new Date(Date.now() - 60 * 60 * 1000).toISOString()
     },
@@ -50,6 +55,7 @@ let messages = [
         location: "Caracas, Venezuela",
         text: "¡Felicidades a todos los graduados! Su esfuerzo y dedicación son inspiradoras.",
         likes: 19,
+        likedBy: [],
         avatar: "https://i.pravatar.cc/150?img=6",
         createdAt: new Date(Date.now() - 60 * 60 * 1000).toISOString()
     }
@@ -126,21 +132,56 @@ export default function handler(req, res) {
     // LIKE MESSAGE
     // =========================
     if (req.method === 'PATCH') {
+        const { id, userId } = req.body;
 
-        const { id } = req.body;
+        // Validación
+        if (!id || !userId) {
+            return res.status(400).json({
+                error: "id and userId are required"
+            });
+        }
 
-        const message = messages.find(msg => msg.id === id);
+        const messageIndex = messages.findIndex(msg => msg.id === id);
 
-        if (!message) {
-
+        if (messageIndex === -1) {
             return res.status(404).json({
                 error: "Message not found"
             });
         }
 
-        message.likes += 1;
+        const message = messages[messageIndex];
+        const userLikedIndex = message.likedBy.indexOf(userId);
+        const userLiked = userLikedIndex !== -1;
 
-        return res.status(200).json(message);
+        if (userLiked) {
+            // Quitar el like
+            message.likes -= 1;
+            message.likedBy.splice(userLikedIndex, 1); // Remover userId del array
+            
+            console.log(`Like removido - Mensaje ${id}, Usuario ${userId}`);
+            console.log(`Ahora tiene ${message.likes} likes`);
+            
+            return res.status(200).json({ 
+                ...message,
+                liked: false,
+                likes: message.likes,
+                time: getRelativeTime(message.createdAt)
+            });
+        } else {
+            // Agregar like
+            message.likes += 1;
+            message.likedBy.push(userId);
+            
+            console.log(`Like agregado - Mensaje ${id}, Usuario ${userId}`);
+            console.log(`Ahora tiene ${message.likes} likes`);
+            
+            return res.status(200).json({ 
+                ...message,
+                liked: true,
+                likes: message.likes,
+                time: getRelativeTime(message.createdAt)
+            });
+        }
     }
 
     // =========================

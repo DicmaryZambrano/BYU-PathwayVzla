@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  name      String
+  location  String
+  text      String
+  likes     Int      @default(0)
+  likedBy   String[]
+  avatar    String
+  createdAt DateTime @default(now())
+}

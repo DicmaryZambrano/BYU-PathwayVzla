@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/DicmaryZambrano/BYU-PathwayVzla/issues"
   },
-  "homepage": "https://github.com/DicmaryZambrano/BYU-PathwayVzla#readme"
+  "homepage": "https://github.com/DicmaryZambrano/BYU-PathwayVzla#readme",
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "prisma": "^6.19.3"
+  }
 }
