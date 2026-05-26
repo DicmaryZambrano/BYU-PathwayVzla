@@ -1,67 +1,20 @@
-let messages = [
-    {
-        id: 1,
-        name: "María González",
-        location: "Caracas, Venezuela",
-        text: "¡Felicidades a todos los graduados! Su dedicación y esfuerzo son un ejemplo para todos.",
-        likes: 24,
-        likedBy: [],
-        avatar: "https://i.pravatar.cc/150?img=1",
-        createdAt: new Date(Date.now() - 60 * 60 * 1000).toISOString()
-    },
-    {
-        id: 2,
-        name: "Juan Pérez",
-        location: "Maracaibo, Venezuela",
-        text: "Dios los bendiga en esta nueva etapa. ¡Mucho éxito en todo lo que viene!",
-        likes: 18,
-        likedBy: [],
-        avatar: "https://i.pravatar.cc/150?img=2",
-        createdAt: new Date(Date.now() - 60 * 60 * 1000).toISOString()
-    },
-    {
-        id: 3,
-        name: "Familia Rodríguez",
-        location: "Valencia, Venezuela",
-        text: "Estamos muy orgullosos de ustedes! Este es solo el comienzo de cosas increíbles.",
-        likes: 31,
-        likedBy: [],
-        avatar: "https://i.pravatar.cc/150?img=3",
-        createdAt: new Date(Date.now() - 60 * 60 * 1000).toISOString()
-    },
-    {
-        id: 4,
-        name: "Carlos Ramírez",
-        location: "Barquisimeto, Venezuela",
-        text: "¡Felicitaciones a todos los graduados! Su esfuerzo y dedicación son inspiradoras.",
-        likes: 15,
-        likedBy: [],
-        avatar: "https://i.pravatar.cc/150?img=4",
-        createdAt: new Date(Date.now() - 60 * 60 * 1000).toISOString()
-    },
-    {
-        id: 5,
-        name: "Ana Martínez",
-        location: "Maracaibo, Venezuela",
-        text: "¡Felicidades a todos los graduados! Su esfuerzo y dedicación son inspiradoras.",
-        likes: 22,
-        likedBy: [],
-        avatar: "https://i.pravatar.cc/150?img=5",
-        createdAt: new Date(Date.now() - 60 * 60 * 1000).toISOString()
-    },
-    {
-        id: 6,
-        name: "Luis Hernández",
-        location: "Caracas, Venezuela",
-        text: "¡Felicidades a todos los graduados! Su esfuerzo y dedicación son inspiradoras.",
-        likes: 19,
-        likedBy: [],
-        avatar: "https://i.pravatar.cc/150?img=6",
-        createdAt: new Date(Date.now() - 60 * 60 * 1000).toISOString()
-    }
-];
+import { prisma } from '../lib/prisma';
 
-// Format relative time
+// =========================
+// API AVATAR GENERATION
+// =========================
+
+const avatarStyles = ['identicon', 'pixel-art', 'gridy', 'rings', 'thumbs'];
+
+function getRandomAvatarStyle(name) {
+    // Usa el nombre como semilla para consistencia
+    const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return avatarStyles[hash % avatarStyles.length];
+}
+
+// =========================
+// RELATIVE TIME
+// =========================
 function getRelativeTime(dateString) {
 
     const now = new Date();
@@ -80,114 +33,142 @@ function getRelativeTime(dateString) {
     return `Hace ${days} día${days > 1 ? 's' : ''}`;
 }
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
 
-    // =========================
-    // GET ALL MESSAGES
-    // =========================
-    if (req.method === 'GET') {
+    try {
 
-        const formattedMessages = messages.map(message => ({
-            ...message,
-            time: getRelativeTime(message.createdAt)
-        }));
+        // =========================
+        // GET
+        // =========================
+        if (req.method === 'GET') {
 
-        return res.status(200).json(formattedMessages);
-    }
+            const messages = await prisma.message.findMany({
+                orderBy: {
+                    createdAt: 'desc'
+                }
+            });
 
-    // =========================
-    // CREATE MESSAGE
-    // =========================
-    if (req.method === 'POST') {
+            const formattedMessages = messages.map(message => ({
+                ...message,
+                time: getRelativeTime(message.createdAt)
+            }));
 
-        const { name, location, message } = req.body;
+            return res.status(200).json(formattedMessages);
+        }
 
-        // Basic validation
-        if (!name || !location || !message) {
+        // =========================
+        // CREATE
+        // =========================
+        if (req.method === 'POST') {
 
-            return res.status(400).json({
-                error: "All fields are required"
+            const { name, location, message } = req.body;
+
+            
+
+            if (!name || !location || !message) {
+
+                return res.status(400).json({
+                    error: 'All fields are required'
+                });
+            }
+
+            const newMessage = await prisma.message.create({
+                data: {
+                    name: name.trim(),
+                    location: location.trim(),
+                    text: message.trim(),
+                    likes: 0,
+                    likedBy: [],
+                    avatar: `https://api.dicebear.com/7.x/${getRandomAvatarStyle(name)}/svg?seed=${encodeURIComponent(name)}&backgroundColor=0A3D6D`
+                }
+            });
+
+            return res.status(201).json({
+                ...newMessage,
+                time: "Ahora"
             });
         }
 
-        const newMessage = {
-            id: Date.now(),
-            name: name.trim(),
-            location: location.trim(),
-            message: message.trim(),
-            likes: 0,
-            avatar: `https://i.pravatar.cc/150?u=${encodeURIComponent(name)}`,
-            createdAt: new Date().toISOString()
-        };
+        // =========================
+        // LIKE
+        // =========================
+        if (req.method === 'PATCH') {
 
-        messages.unshift(newMessage);
+            const { id, userId } = req.body;
 
-        return res.status(201).json({
-            ...newMessage,
-            time: "Ahora"
+            if (!id || !userId) {
+                return res.status(400).json({
+                    error: 'id and userId required'
+                });
+            }
+
+            const message = await prisma.message.findUnique({
+                where: {
+                    id: Number(id)
+                }
+            });
+
+            if (!message) {
+
+                return res.status(404).json({
+                    error: 'Message not found'
+                });
+            }
+
+            const alreadyLiked = message.likedBy.includes(userId);
+
+            let updatedMessage;
+
+            if (alreadyLiked) {
+
+                updatedMessage = await prisma.message.update({
+                    where: {
+                        id: Number(id)
+                    },
+                    data: {
+                        likes: {
+                            decrement: 1
+                        },
+                        likedBy: {
+                            set: message.likedBy.filter(id => id !== userId)
+                        }
+                    }
+                });
+
+            } else {
+
+                updatedMessage = await prisma.message.update({
+                    where: {
+                        id: Number(id)
+                    },
+                    data: {
+                        likes: {
+                            increment: 1
+                        },
+                        likedBy: {
+                            push: userId
+                        }
+                    }
+                });
+            }
+
+            return res.status(200).json({
+                ...updatedMessage,
+                liked: !alreadyLiked,
+                time: getRelativeTime(updatedMessage.createdAt)
+            });
+        }
+
+        return res.status(405).json({
+            error: 'Method not allowed'
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        return res.status(500).json({
+            error: 'Internal server error'
         });
     }
-
-    // =========================
-    // LIKE MESSAGE
-    // =========================
-    if (req.method === 'PATCH') {
-        const { id, userId } = req.body;
-
-        // Validación
-        if (!id || !userId) {
-            return res.status(400).json({
-                error: "id and userId are required"
-            });
-        }
-
-        const messageIndex = messages.findIndex(msg => msg.id === id);
-
-        if (messageIndex === -1) {
-            return res.status(404).json({
-                error: "Message not found"
-            });
-        }
-
-        const message = messages[messageIndex];
-        const userLikedIndex = message.likedBy.indexOf(userId);
-        const userLiked = userLikedIndex !== -1;
-
-        if (userLiked) {
-            // Quitar el like
-            message.likes -= 1;
-            message.likedBy.splice(userLikedIndex, 1); // Remover userId del array
-            
-            console.log(`Like removido - Mensaje ${id}, Usuario ${userId}`);
-            console.log(`Ahora tiene ${message.likes} likes`);
-            
-            return res.status(200).json({ 
-                ...message,
-                liked: false,
-                likes: message.likes,
-                time: getRelativeTime(message.createdAt)
-            });
-        } else {
-            // Agregar like
-            message.likes += 1;
-            message.likedBy.push(userId);
-            
-            console.log(`Like agregado - Mensaje ${id}, Usuario ${userId}`);
-            console.log(`Ahora tiene ${message.likes} likes`);
-            
-            return res.status(200).json({ 
-                ...message,
-                liked: true,
-                likes: message.likes,
-                time: getRelativeTime(message.createdAt)
-            });
-        }
-    }
-
-    // =========================
-    // METHOD NOT ALLOWED
-    // =========================
-    return res.status(405).json({
-        error: 'Method not allowed'
-    });
 }

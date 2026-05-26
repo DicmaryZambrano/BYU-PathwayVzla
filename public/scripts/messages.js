@@ -13,12 +13,18 @@ document.addEventListener("DOMContentLoaded", async() => {
     const messagesList = document.getElementById("messagesList");
     const messagesCount = document.getElementById("messagesCount");
 
+    const btnSendMessage = document.getElementById("btnSendMessage");
+    const messageTextarea = document.getElementById("messageTextarea");
+    const nameInput = document.getElementById("nameInput");
+    const locationSelect = document.getElementById("locationSelect");
+    const anonymousCheck = document.getElementById("anonymousCheck");
+
     function renderMessages() {
         messagesList.innerHTML = "";
 
         messages.forEach(message => {
             const messageCard = document.createElement("div");
-            messageCard.className = "message-card fade-in.visible";
+            messageCard.className = "message-card fade-in visible";
 
             // Determinar si el usuario actual ha dado like
             const isLiked = message.likedBy && message.likedBy.includes(userId);
@@ -174,6 +180,95 @@ document.addEventListener("DOMContentLoaded", async() => {
         div.textContent = text;
         return div.innerHTML;
     }
+
+    messageTextarea.addEventListener('input', () => {
+    console.log('TEXTAREA VALUE:', messageTextarea.value);
+    });
+
+    btnSendMessage.addEventListener('click', async (event) => {
+        event.preventDefault();
+
+        console.log("ANTES:", messageTextarea.value);
+
+        const text = messageTextarea.value.trim();
+
+        console.log("DESPUÉS:", text);
+        
+        const location = locationSelect.value;
+
+        let name = nameInput.value.trim();
+
+        if (anonymousCheck.checked) {
+            name = "Invitado";
+        }
+
+        console.log({
+            name,
+            location,
+            text
+        });
+
+        if (!name || !location || !text) {
+            alert("Por favor completa todos los campos");
+            return;
+        }
+
+        try {
+
+            btnSendMessage.disabled = true;
+            btnSendMessage.textContent = "Enviando...";
+
+            const response = await fetch('/api/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name,
+                    location,
+                    message: text
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to create message');
+            }
+
+            const newMessage = await response.json();
+
+            // Agregar arriba del feed
+            messages.unshift(newMessage);
+
+            // Render
+            renderMessages();
+
+            // Reset form
+            messageTextarea.value = '';
+            nameInput.value = '';
+            locationSelect.selectedIndex = 0;
+            anonymousCheck.checked = false;
+
+            // Reset counter
+            document.getElementById('charCounter').textContent = '0/500';
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert('Error enviando mensaje');
+
+        } finally {
+
+            btnSendMessage.disabled = false;
+            btnSendMessage.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13" />
+                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                </svg>
+                Enviar mensaje
+            `;
+        }
+    });
 
     renderMessages();
 });

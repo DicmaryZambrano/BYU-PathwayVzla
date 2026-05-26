@@ -18,8 +18,11 @@
     "url": "https://github.com/DicmaryZambrano/BYU-PathwayVzla/issues"
   },
   "homepage": "https://github.com/DicmaryZambrano/BYU-PathwayVzla#readme",
+  "devDependencies": {
+    "dotenv": "^17.4.2"
+  },
   "dependencies": {
-    "@prisma/client": "^6.19.3",
-    "prisma": "^6.19.3"
+    "@prisma/client": "^6.19.0",
+    "prisma": "^6.19.0"
   }
 }

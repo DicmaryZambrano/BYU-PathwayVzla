@@ -141,7 +141,7 @@
         // ============================================
         // SEND MESSAGE BUTTON
         // ============================================
-        const btnSendMessage = document.getElementById('btnSendMessage');
+        /*const btnSendMessage = document.getElementById('btnSendMessage');
 
         if (btnSendMessage && messageTextarea && charCountEl) {
             btnSendMessage.addEventListener('click', function () {
@@ -209,12 +209,12 @@
                     if (newLike) setupLikeButton(newLike);
                 }
             });
-        }
+        }*/
 
         // ============================================
         // LIKE BUTTON FUNCTIONALITY
         // ============================================
-        function setupLikeButton(likeElement) {
+        /*function setupLikeButton(likeElement) {
             likeElement.addEventListener('click', function () {
                 const isLiked = this.getAttribute('data-liked') === 'true';
                 const countSpan = this.querySelector('.likes-count');
@@ -238,7 +238,7 @@
         // Setup existing like buttons
         document.querySelectorAll('.message-likes').forEach(function (likeEl) {
             setupLikeButton(likeEl);
-        });
+        });*/
 
         // ============================================
         // CONFETTI ANIMATION
@@ -471,7 +471,7 @@
         // ============================================
         // MENSAJES.HTML SPECIFIC LOGIC
         // ============================================
-        (function() {
+        /*(function() {
             const charCounter = document.getElementById('charCounter');
             const messagesCount = document.getElementById('messagesCount');
             
@@ -711,7 +711,7 @@
                     }, 1500);
                 });
             }
-        })();
+        })();*/
 
         // ============================================
         // INFO PAGE ANIMATIONS
