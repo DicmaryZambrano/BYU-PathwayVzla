@@ -181,18 +181,11 @@ document.addEventListener("DOMContentLoaded", async() => {
         return div.innerHTML;
     }
 
-    messageTextarea.addEventListener('input', () => {
-    console.log('TEXTAREA VALUE:', messageTextarea.value);
-    });
-
     btnSendMessage.addEventListener('click', async (event) => {
         event.preventDefault();
 
-        console.log("ANTES:", messageTextarea.value);
-
         const text = messageTextarea.value.trim();
 
-        console.log("DESPUÉS:", text);
         
         const location = locationSelect.value;
 
@@ -201,12 +194,6 @@ document.addEventListener("DOMContentLoaded", async() => {
         if (anonymousCheck.checked) {
             name = "Invitado";
         }
-
-        console.log({
-            name,
-            location,
-            text
-        });
 
         if (!name || !location || !text) {
             alert("Por favor completa todos los campos");
@@ -229,6 +216,10 @@ document.addEventListener("DOMContentLoaded", async() => {
                     message: text
                 })
             });
+
+            if (response.ok) {
+            alert('Mensaje enviado. Será revisado por nuestros moderadores antes de aparecer en el muro.');
+            }
 
             if (!response.ok) {
                 throw new Error('Failed to create message');

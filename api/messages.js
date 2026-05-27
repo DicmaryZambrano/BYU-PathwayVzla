@@ -38,11 +38,13 @@ export default async function handler(req, res) {
     try {
 
         // =========================
-        // GET
+        // GET - Solo mostrar aprovados
         // =========================
         if (req.method === 'GET') {
-
             const messages = await prisma.message.findMany({
+                where: {
+                    status: 'approved'  // Solo mostrar aprobados
+                },
                 orderBy: {
                     createdAt: 'desc'
                 }
@@ -79,6 +81,7 @@ export default async function handler(req, res) {
                     text: message.trim(),
                     likes: 0,
                     likedBy: [],
+                    status: 'pending',  // Siempre crear como pendiente para moderación
                     avatar: `https://api.dicebear.com/7.x/${getRandomAvatarStyle(name)}/svg?seed=${encodeURIComponent(name)}&backgroundColor=0A3D6D`
                 }
             });

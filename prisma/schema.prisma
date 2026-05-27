@@ -16,4 +16,7 @@ model Message {
   likedBy   String[]
   avatar    String
   createdAt DateTime @default(now())
+  status    String   @default("pending")
+  reviewedAt DateTime?
+  reviewedBy String?
 }
