@@ -209,7 +209,7 @@
                                 <span>Publicar de forma anónima</span>
                             </label>
                         </div>
-                        <button class="btn-send-message" id="btnSendMessage">
+                        <button type="button" class="btn-send-message" id="btnSendMessage">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
                                 <line x1="22" y1="2" x2="11" y2="13" />
@@ -232,160 +232,7 @@
 
                 <!-- Messages List -->
                 <div class="messages-list" id="messagesList">
-                    <!-- Message 1 -->
-                    <div class="message-card fade-in">
-                        <div class="message-card-top">
-                            <div class="message-avatar">
-                                <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/16f490748-6b90-4f02-922b-0d70431973b4.png"
-                                    alt="María González">
-                            </div>
-                            <div class="message-card-content">
-                                <div class="message-card-header">
-                                    <div>
-                                        <h5 class="message-name">María González</h5>
-                                        <span class="message-location">Caracas, Venezuela</span>
-                                    </div>
-                                    <div class="message-card-actions">
-                                        <span class="message-time">Hace 1 hora</span>
-                                        <button class="message-like-btn" data-liked="false" data-count="24">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round">
-                                                <path
-                                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                            </svg>
-                                            <span class="likes-count">24</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <p class="message-text">¡Felicidades a todos los graduados! Su dedicación y esfuerzo son
-                                    un ejemplo para todos. ¡El futuro es suyo!</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Message 2 -->
-                    <div class="message-card fade-in">
-                        <div class="message-card-top">
-                            <div class="message-avatar">
-                                <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/142a2f644-c727-4272-937f-ee052c325608.png"
-                                    alt="Juan Pérez">
-                            </div>
-                            <div class="message-card-content">
-                                <div class="message-card-header">
-                                    <div>
-                                        <h5 class="message-name">Juan Pérez</h5>
-                                        <span class="message-location">Maracaibo, Venezuela</span>
-                                    </div>
-                                    <div class="message-card-actions">
-                                        <span class="message-time">Hace 3 horas</span>
-                                        <button class="message-like-btn" data-liked="false" data-count="18">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round">
-                                                <path
-                                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                            </svg>
-                                            <span class="likes-count">18</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <p class="message-text">Dios los bendiga en esta nueva etapa. ¡Mucho éxito en todo lo
-                                    que viene!</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Message 3 -->
-                    <div class="message-card fade-in">
-                        <div class="message-card-top">
-                            <div class="message-avatar">
-                                <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/1b2f9e0e9-bdcd-4722-8ed4-11eeb42caa91.png"
-                                    alt="Familia Rodríguez">
-                            </div>
-                            <div class="message-card-content">
-                                <div class="message-card-header">
-                                    <div>
-                                        <h5 class="message-name">Familia Rodríguez</h5>
-                                        <span class="message-location">Valencia, Venezuela</span>
-                                    </div>
-                                    <div class="message-card-actions">
-                                        <span class="message-time">Hace 5 horas</span>
-                                        <button class="message-like-btn" data-liked="false" data-count="31">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round">
-                                                <path
-                                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                            </svg>
-                                            <span class="likes-count">31</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <p class="message-text">Estamos muy orgullosos de ustedes! Este es solo el comienzo de
-                                    cosas increíbles.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Message 4 -->
-                    <div class="message-card fade-in">
-                        <div class="message-card-top">
-                            <div class="message-avatar">
-                                <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/1012ac41f-4342-4ed6-a5c9-76559818bc30.png"
-                                    alt="Luis Martínez">
-                            </div>
-                            <div class="message-card-content">
-                                <div class="message-card-header">
-                                    <div>
-                                        <h5 class="message-name">Luis Martínez</h5>
-                                        <span class="message-location">Barquisimeto, Venezuela</span>
-                                    </div>
-                                    <div class="message-card-actions">
-                                        <span class="message-time">Hace 6 horas</span>
-                                        <button class="message-like-btn" data-liked="false" data-count="15">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round">
-                                                <path
-                                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                            </svg>
-                                            <span class="likes-count">15</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <p class="message-text">Cada sacrificio tiene su recompensa. ¡Felicitaciones graduados!
-                                    Sigan adelante.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Message 5 -->
-                    <div class="message-card fade-in">
-                        <div class="message-card-top">
-                            <div class="message-avatar">
-                                <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/186dff940-2adc-41d5-86b5-5a5849e7052d.png"
-                                    alt="Andrea López">
-                            </div>
-                            <div class="message-card-content">
-                                <div class="message-card-header">
-                                    <div>
-                                        <h5 class="message-name">Andrea López</h5>
-                                        <span class="message-location">Caracas, Venezuela</span>
-                                    </div>
-                                    <div class="message-card-actions">
-                                        <span class="message-time">Hace 8 horas</span>
-                                        <button class="message-like-btn" data-liked="false" data-count="22">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round">
-                                                <path
-                                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                            </svg>
-                                            <span class="likes-count">22</span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <p class="message-text">Qué alegría ver este logro. ¡Que sigan cumpliendo todos sus
-                                    sueños!</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Load More Button -->
@@ -745,6 +592,7 @@
         </div>
     </div>
 
+    <script src="scripts/messages.js"></script>
     <script src="scripts/animaciones.js"></script>
 </body>
 
