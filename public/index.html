@@ -12,6 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles/estilos.css">
++   <link rel="stylesheet" href="styles/mensajes.css">
 </head>
 
 <body>
@@ -44,7 +45,7 @@
     <header class="header" id="header">
         <div class="header-inner">
             <a href="index.html" class="header-logo">
-                <img src="images/logo.jpg" alt="BYU Pathway Venezuela Logo">
+                <img src="images/logo.webp" alt="BYU Pathway Venezuela Logo">
             </a>
             <nav class="header-nav" id="headerNav">
                 <a href="index.html" class="active">Inicio</a>
@@ -55,7 +56,7 @@
                 <a href="info.html">Acerca de</a>
                 <a href="#" class="live-link">En Vivo</a>
             </nav>
-            <button class="header-cta" id="headerCta">
+            <button class="header-cta upload-btn-trigger" id="headerCta">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -81,8 +82,8 @@
         <a href="mensajes.html">Mensajes</a>
         <a href="info.html">Acerca de</a>
         <a href="#" class="live-link">En Vivo</a>
-        <a href="#" style="background: var(--blue-dark); color: white; text-align: center; margin-top: 10px;">
-            Subir Contenido â†‘
+       <a href="#" class="upload-btn-trigger" style="background: var(--blue-dark); color: white; text-align: center; margin-top: 10px;">
+            Subir Contenido ↑
         </a>
     </nav>
 
@@ -95,8 +96,10 @@
                 <h1 class="hero-title">¡Felicidades,<br>Graduados!</h1>
                 <h2 class="hero-subtitle">Tu Legado Comienza Ahora</h2>
                 <p class="hero-description">
-                    Un espacio para compartir tus fotos, videos y vivir juntos este momento histórico. Hoy no solo
-                    celebramos el fin de una etapa, celebramos el nacimiento de líderes que transformarán Venezuela.
+                    Un espacio creado por y para <strong>graduandos</strong>, unidos para celebrar el nacimiento de líderes que transformarán su comunidad. Comparte aquí tus fotos y vídeos.
+                </p>
+                <p class="hero-description">
+                    Este sitio <b style="font-weight: bold; color: #f2b632;">no es oficial</b> ni está afiliado a <strong>BYU-Pathway Worldwide</strong> ni a <strong>Instituto de Religión</strong>.
                 </p>
                 <div class="hero-buttons">
                     <a href="fotos.html" class="btn-primary">
@@ -108,7 +111,7 @@
                         </svg>
                         Explorar Galería
                     </a>
-                    <button class="btn-secondary">
+                    <button class="btn-secondary upload-btn-trigger">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -152,7 +155,7 @@
                 <div class="countdown-timer" id="countdownTimer">
                     <div class="countdown-item">
                         <span class="countdown-number" id="countDays">000</span>
-                        <span class="countdown-label">DÃ­as</span>
+                        <span class="countdown-label">Días</span>
                     </div>
                     <div class="countdown-item">
                         <span class="countdown-number" id="countHours">00</span>
@@ -360,9 +363,9 @@
                         </svg>
                     </div>
                     <div class="timeline-content-wrap">
-                        <div class="timeline-time">08:00 AM</div>
-                        <div class="timeline-title">Recepción de Graduandos</div>
-                        <div class="timeline-desc">Entrega de birretes y estolas.</div>
+                        <div class="timeline-time">04:30 PM</div>
+                        <div class="timeline-title">Recepción de Graduandos (BYU)</div>
+                        <div class="timeline-desc">Registro e imposición de estolas.</div>
                     </div>
                 </div>
                 <div class="timeline-item fade-in" style="transition-delay: 0.2s;">
@@ -374,9 +377,9 @@
                         </svg>
                     </div>
                     <div class="timeline-content-wrap">
-                        <div class="timeline-time">09:00 AM</div>
-                        <div class="timeline-title">Reunión General</div>
-                        <div class="timeline-desc">Palabras de bienvenida e instrucciones generales.</div>
+                        <div class="timeline-time">05:30 PM</div>
+                        <div class="timeline-title">Recepción de Graduados (Instituto)</div>
+                        <div class="timeline-desc">Ensayo general y repaso protocolar.</div>
                     </div>
                 </div>
                 <div class="timeline-item fade-in" style="transition-delay: 0.3s;">
@@ -388,9 +391,9 @@
                         </svg>
                     </div>
                     <div class="timeline-content-wrap">
-                        <div class="timeline-time">10:00 AM</div>
-                        <div class="timeline-title">Ceremonia Oficial</div>
-                        <div class="timeline-desc">Entrega de diplomas y reconocimientos.</div>
+                        <div class="timeline-time">06:15 PM</div>
+                        <div class="timeline-title">Apertura de la Transmisión</div>
+                        <div class="timeline-desc">Inicio de la señal en vivo (Streaming).</div>
                     </div>
                 </div>
                 <div class="timeline-item fade-in" style="transition-delay: 0.4s;">
@@ -405,9 +408,9 @@
                         </svg>
                     </div>
                     <div class="timeline-content-wrap">
-                        <div class="timeline-time">12:00 PM</div>
-                        <div class="timeline-title">Brindis de Honor</div>
-                        <div class="timeline-desc">Celebración con graduandos y familiares.</div>
+                        <div class="timeline-time">06:30 PM</div>
+                        <div class="timeline-title">Ceremonia Oficial de Graduación</div>
+                        <div class="timeline-desc">Discursos de honor y entrega de títulos académicos.</div>
                     </div>
                 </div>
                 <div class="timeline-item fade-in" style="transition-delay: 0.5s;">
@@ -422,9 +425,9 @@
                         </svg>
                     </div>
                     <div class="timeline-content-wrap">
-                        <div class="timeline-time">01:00 PM</div>
-                        <div class="timeline-title">Almuerzo</div>
-                        <div class="timeline-desc">Compartamos juntos este gran logro.</div>
+                        <div class="timeline-time">08:30 PM</div>
+                        <div class="timeline-title">receoción y Brindis de Honor</div>
+                        <div class="timeline-desc">Compartamos juntos este gran logro en nuestra Fiesta de Graduación.</div>
                     </div>
                 </div>
             </div>
@@ -438,83 +441,133 @@
         </div>
         <div class="messages-layout">
             <!-- Message Form -->
+            <!-- Message Form -->
             <div class="message-form-card fade-in-left">
-                <div class="message-form-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
+                <div class="message-form-header">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#009bb6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                     </svg>
+                    <h3>Deja tu mensaje</h3>
                 </div>
-                <textarea class="message-textarea" id="messageTextarea"
-                    placeholder="Escribe tu mensaje de felicitaciones..." maxlength="200"></textarea>
-                <div class="message-counter"><span id="charCount">0</span>/200</div>
-                <button class="btn-send-message" id="btnSendMessage">
-                    Enviar Mensaje
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <line x1="22" y1="2" x2="11" y2="13" />
-                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                    </svg>
-                </button>
+                <div class="message-form-body">
+                    <div class="textarea-wrapper">
+                        <textarea class="message-textarea" id="messageTextarea" placeholder="Escribe tu mensaje de felicitación..." maxlength="500"></textarea>
+                        <div class="char-counter" id="charCounter">0/500</div>
+                    </div>
+                    <div class="form-fields-row">
+                        <div class="form-field">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                            <input type="text" class="form-input" id="nameInput" placeholder="Tu nombre">
+                        </div>
+                        <div class="form-field">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#6B7280" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg>
+                            <select class="form-select" id="locationSelect">
+                                <option value="" disabled selected>¿Lugar?</option>
+                                <option value="Caracas">Caracas</option>
+                                <option value="Maracaibo">Maracaibo</option>
+                                <option value="Valencia">Valencia</option>
+                                <option value="Barquisimeto">Barquisimeto</option>
+                                <option value="Mérida">Mérida</option>
+                                <option value="San Cristóbal">San Cristóbal</option>
+                                <option value="Ciudad Guayana">Ciudad Guayana</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <label class="checkbox-field">
+                            <input type="checkbox" id="anonymousCheck">
+                            <span>Anónimo</span>
+                        </label>
+                    </div>
+                    <button class="btn-send-message" id="btnSendMessage">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="22" y1="2" x2="11" y2="13" />
+                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                        </svg>
+                        Enviar mensaje
+                    </button>
+                </div>
             </div>
 
             <!-- Messages List -->
-            <div class="messages-list fade-in-right">
-                <div class="message-item">
-                    <div class="message-avatar" style="background: linear-gradient(135deg, #f09433, #e6683c);">MG</div>
-                    <div class="message-content">
-                        <div class="message-header">
-                            <span class="message-name">María González</span>
-                            <span class="message-time">Hace 2 horas</span>
+            <div class="messages-list fade-in-right" id="messagesList" data-max-messages="3">
+                <div class="message-card fade-in">
+                    <div class="message-card-top">
+                        <div class="message-avatar">
+                            <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/16f490748-6b90-4f02-922b-0d70431973b4.png" alt="María González">
                         </div>
-                        <p class="message-text">¡Felicidades a todos los graduados! Su esfuerzo y dedicación son
-                            inspiradores.</p>
-                        <div class="message-likes" data-liked="false" data-count="12">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path
-                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                            </svg>
-                            <span class="likes-count">12</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-item">
-                    <div class="message-avatar" style="background: linear-gradient(135deg, #065577, #009bb6);">JP</div>
-                    <div class="message-content">
-                        <div class="message-header">
-                            <span class="message-name">Juan Perez</span>
-                            <span class="message-time">Hace 4 horas</span>
-                        </div>
-                        <p class="message-text">Dios los bendiga en esta nueva etapa. ¡Mucho Exito en todo lo que
-                            viene!
-                        </p>
-                        <div class="message-likes" data-liked="false" data-count="8">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path
-                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                            </svg>
-                            <span class="likes-count">8</span>
+                        <div class="message-card-content">
+                            <div class="message-card-header">
+                                <div>
+                                    <h5 class="message-name">María González</h5>
+                                    <span class="message-location">Caracas, Venezuela</span>
+                                </div>
+                                <div class="message-card-actions">
+                                    <span class="message-time">Hace 2 horas</span>
+                                    <button class="message-like-btn" data-liked="false" data-count="12">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                        </svg>
+                                        <span class="likes-count">12</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="message-text">¡Felicidades a todos los graduados! Su esfuerzo y dedicación son inspiradores.</p>
                         </div>
                     </div>
                 </div>
-                <div class="message-item">
-                    <div class="message-avatar" style="background: linear-gradient(135deg, #F2B632, #ffc328);">FR</div>
-                    <div class="message-content">
-                        <div class="message-header">
-                            <span class="message-name">Familia Rodríguez</span>
-                            <span class="message-time">Hace 6 horas</span>
+                <div class="message-card fade-in">
+                    <div class="message-card-top">
+                        <div class="message-avatar">
+                            <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/142a2f644-c727-4272-937f-ee052c325608.png" alt="Juan Perez">
                         </div>
-                        <p class="message-text">¡Estamos muy orgullosos de ustedes! Este es solo el comienzo de cosas
-                            increíbles. </p>
-                        <div class="message-likes" data-liked="false" data-count="15">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path
-                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                            </svg>
-                            <span class="likes-count">15</span>
+                        <div class="message-card-content">
+                            <div class="message-card-header">
+                                <div>
+                                    <h5 class="message-name">Juan Perez</h5>
+                                    <span class="message-location">Maracaibo, Venezuela</span>
+                                </div>
+                                <div class="message-card-actions">
+                                    <span class="message-time">Hace 4 horas</span>
+                                    <button class="message-like-btn" data-liked="false" data-count="8">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                        </svg>
+                                        <span class="likes-count">8</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="message-text">Dios los bendiga en esta nueva etapa. ¡Mucho Exito en todo lo que viene!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="message-card fade-in">
+                    <div class="message-card-top">
+                        <div class="message-avatar">
+                            <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/1b2f9e0e9-bdcd-4722-8ed4-11eeb42caa91.png" alt="Familia Rodríguez">
+                        </div>
+                        <div class="message-card-content">
+                            <div class="message-card-header">
+                                <div>
+                                    <h5 class="message-name">Familia Rodríguez</h5>
+                                    <span class="message-location">Valencia, Venezuela</span>
+                                </div>
+                                <div class="message-card-actions">
+                                    <span class="message-time">Hace 6 horas</span>
+                                    <button class="message-like-btn" data-liked="false" data-count="15">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                                        </svg>
+                                        <span class="likes-count">15</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="message-text">¡Estamos muy orgullosos de ustedes! Este es solo el comienzo de cosas increíbles. </p>
                         </div>
                     </div>
                 </div>
@@ -554,8 +607,8 @@
         <div class="footer-inner">
             <!-- Column 1: Branding -->
             <div class="footer-branding">
-                <img src="images/logo2.jpg" alt="BYU Pathway Venezuela">
-                <p>Educación accesible, flexible y de calidad para transformar vidas y comunidades.</p>
+                <img src="images/logo2.webp" alt="BYU Pathway Venezuela">
+                <p>Brindamos acceso a una educación superior asequible, flexible y con base espiritual, diseñada para desarrollar <strong>discípulos de Jesucristo</strong> que sean líderes en sus hogares, en la Iglesia y en sus comunidades.</p>
             </div>
 
             <!-- Column 2: Quick Links -->
@@ -618,7 +671,7 @@
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                         <polyline points="22,6 12,13 2,6" />
                     </svg>
-                    <span>info@byupathwayvzla.edu</span>
+                    <span>info@graduadosbyupathwayvzla.edu</span>
                 </div>
                 <div class="footer-contact-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -626,7 +679,7 @@
                         <path
                             d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                     </svg>
-                    <span>+58 212-555-1234</span>
+                    <span>+58 424-826-6554</span>
                 </div>
                 <div class="footer-contact-item">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -639,7 +692,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2024 BYU-Pathway Worldwide. Todos los derechos reservados.</p>
+            <p>© 2024 Graduandos BYU-Pathway e Instituto. <strong>Sitio no oficial</strong> — independiente de la universidad. Todos los derechos reservados.</p>
         </div>
     </footer>
 
@@ -659,6 +712,25 @@
                         allowfullscreen>
                     </iframe>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL FUNCIÓN DESACTIVADA (DISABLED FUNCTION MODAL) -->
+    <div id="disabledFunctionModal" class="disabled-modal" role="dialog" aria-labelledby="disabledModalTitle" aria-hidden="true">
+        <div class="disabled-modal-overlay" id="disabledModalOverlay"></div>
+        <div class="disabled-modal-container">
+            <button class="disabled-modal-close" id="closeDisabledModal" aria-label="Cerrar modal">&times;</button>
+            <div class="disabled-modal-body">
+                <div class="disabled-modal-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
+                <h3 id="disabledModalTitle" class="disabled-modal-title">Función No Disponible</h3>
+                <p class="disabled-modal-text">Esta función actualmente está desactivada</p>
+                <button class="disabled-modal-btn" id="confirmDisabledModal">Entendido</button>
             </div>
         </div>
     </div>

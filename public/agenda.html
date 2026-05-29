@@ -55,7 +55,7 @@
                 <a href="info.html">Acerca de</a>
                 <a href="#" class="live-link">En Vivo</a>
             </nav>
-            <button class="header-cta" id="headerCta">
+            <button class="header-cta upload-btn-trigger" id="headerCta">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -659,6 +659,25 @@
                         allowfullscreen>
                     </iframe>
                 </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- MODAL FUNCIÓN DESACTIVADA (DISABLED FUNCTION MODAL) -->
+    <div id="disabledFunctionModal" class="disabled-modal" role="dialog" aria-labelledby="disabledModalTitle" aria-hidden="true">
+        <div class="disabled-modal-overlay" id="disabledModalOverlay"></div>
+        <div class="disabled-modal-container">
+            <button class="disabled-modal-close" id="closeDisabledModal" aria-label="Cerrar modal">&times;</button>
+            <div class="disabled-modal-body">
+                <div class="disabled-modal-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
+                <h3 id="disabledModalTitle" class="disabled-modal-title">Función No Disponible</h3>
+                <p class="disabled-modal-text">Esta función actualmente está desactivada</p>
+                <button class="disabled-modal-btn" id="confirmDisabledModal">Entendido</button>
             </div>
         </div>
     </div>

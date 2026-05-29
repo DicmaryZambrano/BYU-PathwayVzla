@@ -897,3 +897,70 @@
                 }
             });
         })();
+
+        
+        // ============================================
+        // DISABLED FUNCTION MODAL ("SUBIR CONTENIDO")
+        // ============================================
+        (function () {
+            'use strict';
+            
+            var disabledModal = document.getElementById('disabledFunctionModal');
+            var closeDisabledModal = document.getElementById('closeDisabledModal');
+            var confirmDisabledModal = document.getElementById('confirmDisabledModal');
+            var disabledModalOverlay = document.getElementById('disabledModalOverlay');
+            var uploadTriggers = document.querySelectorAll('.upload-btn-trigger');
+            
+            if (!disabledModal) return;
+
+            function openDisabledModal(e) {
+                if (e) e.preventDefault();
+                
+                disabledModal.style.display = 'flex';
+                // Trigger transition reflow
+                disabledModal.offsetHeight; 
+                disabledModal.classList.add('active');
+                
+                // Disable background scrolling
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeDisabledModalFn() {
+                disabledModal.classList.remove('active');
+                
+                // Wait for the transition to finish before hiding display
+                setTimeout(function () {
+                    disabledModal.style.display = 'none';
+                }, 350); // matches the 0.35s transition defined in CSS
+                
+                // Restore scrolling
+                document.body.style.overflow = 'auto';
+            }
+
+            // Attach event listeners to all triggers
+            uploadTriggers.forEach(function (trigger) {
+                trigger.addEventListener('click', openDisabledModal);
+            });
+
+            // Close modal on close button click
+            if (closeDisabledModal) {
+                closeDisabledModal.addEventListener('click', closeDisabledModalFn);
+            }
+
+            // Close modal on confirm button click
+            if (confirmDisabledModal) {
+                confirmDisabledModal.addEventListener('click', closeDisabledModalFn);
+            }
+
+            // Close modal on background overlay click
+            if (disabledModalOverlay) {
+                disabledModalOverlay.addEventListener('click', closeDisabledModalFn);
+            }
+
+            // Close modal on Escape key press
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && disabledModal.classList.contains('active')) {
+                    closeDisabledModalFn();
+                }
+            });
+        })();
