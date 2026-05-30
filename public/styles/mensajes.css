@@ -291,7 +291,7 @@
     background: var(--white);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
-    padding: 24px;
+    padding: 11px;
     border: 1px solid var(--gray-border);
     transition: var(--transition);
 }
