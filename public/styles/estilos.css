@@ -1491,8 +1491,8 @@
         }
 
         .hero-agenda-icon svg {
-            width: 48px;
-            height: 48px;
+            width: 120px;
+            height: 120px;
             color: var(--yellow-gold);
         }
 
@@ -2658,8 +2658,8 @@
 }
 
 .hero-gallery-icon svg {
-    width: 48px;
-    height: 48px;
+    width: 60px;
+    height: 60px;
     color: var(--yellow-gold);
 }
 
