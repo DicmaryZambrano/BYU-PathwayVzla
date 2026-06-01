@@ -1,16 +1,3 @@
-function extractYoutubeId(url) {
-
-    const regex =
-        /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/;
-
-    const match =
-        url.match(regex);
-
-    return match
-        ? match[1]
-        : "";
-}
-
 function fileToBase64(file) {
 
     return new Promise(
