@@ -562,7 +562,6 @@ document
 
 })();
 
-
 function extractYoutubeId(url) {
 
     const regex =
