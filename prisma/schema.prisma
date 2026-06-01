@@ -27,3 +27,39 @@ model Message {
   reviewedAt DateTime?
   reviewedBy String?
 }
+
+model Photo {
+
+  id Int @id @default(autoincrement())
+  title String
+  category String
+  uploader String
+  imageUrl String
+  likes     Int      @default(0)
+  likedBy   String[]
+  avatar    String
+  status String @default("pending")
+  createdAt DateTime @default(now())
+  reviewedAt DateTime?
+  reviewedBy String?
+}
+
+model Video {
+  id Int @id @default(autoincrement())
+  title       String
+  description String?
+  category    String
+  uploader    String
+  avatar       String
+  videoUrl    String
+  thumbnailUrl String?
+  type        String @default("upload")
+  likes       Int @default(0)
+  likedBy     String[]
+  comments    Int @default(0)
+  duration    String?
+  status      String @default("pending")
+  createdAt   DateTime @default(now())
+  reviewedAt   DateTime?
+  reviewerName String?
+}
