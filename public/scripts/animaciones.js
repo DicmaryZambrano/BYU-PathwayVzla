@@ -123,6 +123,7 @@
         // ============================================
         // MESSAGE TEXTAREA CHARACTER COUNTER
         // ============================================
+        /*
         const messageTextarea = document.getElementById('messageTextarea');
         const charCountEl = document.getElementById('charCount');
 
@@ -136,7 +137,7 @@
                     charCountEl.style.color = '';
                 }
             });
-        }
+        }*/
 
         // ============================================
         // SEND MESSAGE BUTTON

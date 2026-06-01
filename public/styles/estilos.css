@@ -4771,3 +4771,230 @@
 .disabled-modal-btn:active {
     transform: translateY(0);
 }
+
+/* ============================================
+   UPLOAD PHOTO MODAL
+   ============================================ */
+
+.upload-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10200;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.upload-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.upload-modal::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(4, 15, 26, 0.88);
+    backdrop-filter: blur(12px);
+}
+
+.upload-modal-content {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 700px;
+
+    background: linear-gradient(
+        145deg,
+        #0b1e33 0%,
+        #061220 100%
+    );
+
+    border-radius: 24px;
+
+    border: 1px solid rgba(242, 182, 50, 0.2);
+
+    box-shadow:
+        0 30px 60px rgba(0,0,0,0.5),
+        0 0 50px rgba(242,182,50,0.05);
+
+    overflow: hidden;
+
+    transform: translateY(20px) scale(.96);
+    transition: all .35s ease;
+}
+
+.upload-modal.active .upload-modal-content {
+    transform: translateY(0) scale(1);
+}
+
+/* CLOSE BUTTON */
+
+#closeUploadModal {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    background: rgba(255,255,255,.08);
+
+    color: white;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    transition: .25s;
+}
+
+#closeUploadModal:hover {
+    background: rgba(255,255,255,.18);
+    transform: rotate(90deg);
+}
+
+/* HEADER */
+
+.upload-modal-content h3 {
+    margin: 0;
+
+    padding: 30px 30px 20px;
+
+    text-align: center;
+
+    color: white;
+
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+/* PREVIEW */
+
+.preview-image {
+    display: block;
+
+    width: calc(100% - 60px);
+    max-height: 320px;
+
+    margin: 0 auto 25px;
+
+    object-fit: cover;
+
+    border-radius: 16px;
+
+    border: 2px solid rgba(242,182,50,.25);
+
+    background: #08111d;
+}
+
+/* FORM */
+
+#photoForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    padding: 0 30px 30px;
+}
+
+#photoForm input,
+#photoForm select,
+#photoForm textarea {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    background: rgba(255,255,255,.04);
+
+    color: white;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+
+    transition: .25s;
+}
+
+#photoForm input:focus,
+#photoForm select:focus,
+#photoForm textarea:focus {
+    outline: none;
+
+    border-color: #ffc328;
+
+    box-shadow:
+        0 0 0 3px rgba(255,195,40,.15);
+}
+
+#photoForm textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+#photoForm input::placeholder,
+#photoForm textarea::placeholder {
+    color: rgba(255,255,255,.5);
+}
+
+#photoForm select option {
+    background: #0b1e33;
+    color: white;
+}
+
+/* SUBMIT BUTTON */
+
+#photoForm button[type="submit"] {
+    margin-top: 10px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding: 16px;
+
+    cursor: pointer;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+
+    color: #0a1e33;
+
+    background: linear-gradient(
+        135deg,
+        #ffc328 0%,
+        #f2b632 100%
+    );
+
+    transition: .3s;
+}
+
+#photoForm button[type="submit"]:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(242,182,50,.3);
+}
+
+#photoForm button[type="submit"]:active {
+    transform: translateY(0);
+}
