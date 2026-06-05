@@ -5,7 +5,7 @@ import { prisma } from '../../lib/prisma';
 // API AVATAR GENERATION
 // =========================
 
-const avatarStyles = ['identicon', 'pixel-art', 'gridy', 'rings', 'thumbs'];
+const avatarStyles = ['identicon', 'pixel-art', 'rings', 'thumbs'];
 
 function getRandomAvatarStyle(name) {
     // Usa el nombre como semilla para consistencia

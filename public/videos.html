@@ -55,7 +55,9 @@
                 <a href="info.html">Acerca de</a>
                 <a href="#" class="live-link">En Vivo</a>
             </nav>
-            <button class="header-cta" id="headerCta" onclick="document.getElementById('uploadVideoInput').click()">
+            <!-- Desabilitado temporalmente-->
+            <!--button class="header-cta" id="headerCta" onclick="document.getElementById('videoInput').click()"-->
+            <button class="header-cta upload-btn-trigger" id="headerCta">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -81,7 +83,11 @@
         <a href="mensajes.html">Mensajes</a>
         <a href="info.html">Acerca de</a>
         <a href="#">En Vivo</a>
-        <a href="#" onclick="document.getElementById('uploadVideoInput').click()"
+        <!--a href="#" onclick="document.getElementById('videoInput').click()"
+            style="background: var(--blue-dark); color: white; text-align: center; margin-top: 10px;">
+            Subir Video ↑
+        </a-->
+        <a href="#" class="upload-btn-trigger"
             style="background: var(--blue-dark); color: white; text-align: center; margin-top: 10px;">
             Subir Video ↑
         </a>
@@ -128,7 +134,9 @@
                     <p>Sube tu video o comparte el enlace de YouTube para que todos puedan disfrutarlo.</p>
                 </div>
             </div>
-            <div class="upload-btn-card" onclick="document.getElementById('videoInput').click()">
+            <!-- deshabilitado temporalmente -->
+            <!-- <div class="upload-btn-card" onclick="document.getElementById('videoInput').click()"> -->
+            <div class="upload-btn-card upload-btn-trigger">
                 <svg class="upload-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -139,7 +147,7 @@
                 <span class="btn-sub-text">MP4, MOV hasta 8MB</span>
             </div>
             <div class="upload-divider">o</div>
-            <div class="upload-link-card" onclick="showLinkModal()">
+            <div class="upload-link-card upload-btn-trigger" onclick="showLinkModal()">
                 <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
@@ -172,15 +180,14 @@
             </div>
             <select class="filter-select" id="sortSelect" onchange="filterVideos()">
                 <option value="recent">Más recientes</option>
-                <option value="popular">Más populares</option>
                 <option value="oldest">Más antiguos</option>
             </select>
             <select class="filter-select" id="categorySelect" onchange="filterVideos()">
                 <option value="all">Todas las categorías</option>
-                <option value="ceremony">Ceremonia</option>
-                <option value="moments">Momentos</option>
-                <option value="speeches">Discursos</option>
-                <option value="celebrations">Celebraciones</option>
+                <option value="ceremonia">Ceremonia</option>
+                <option value="momentos">Momentos</option>
+                <option value="discursos">Discursos</option>
+                <option value="celebraciones">Celebraciones</option>
             </select>
             <div class="view-toggle">
                 <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')">
@@ -708,9 +715,29 @@
 
     </div>
 
+    <!-- MODAL FUNCIÓN DESACTIVADA (DISABLED FUNCTION MODAL) -->
+    <div id="disabledFunctionModal" class="disabled-modal" role="dialog" aria-labelledby="disabledModalTitle" aria-hidden="true">
+        <div class="disabled-modal-overlay" id="disabledModalOverlay"></div>
+        <div class="disabled-modal-container">
+            <button class="disabled-modal-close" id="closeDisabledModal" aria-label="Cerrar modal">&times;</button>
+            <div class="disabled-modal-body">
+                <div class="disabled-modal-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
+                <h3 id="disabledModalTitle" class="disabled-modal-title">Función No Disponible</h3>
+                <p class="disabled-modal-text">Esta función actualmente está desactivada</p>
+                <button class="disabled-modal-btn" id="confirmDisabledModal">Entendido</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts: Compartido + Específico de Videos -->
     <script src="scripts/animaciones.js"></script>
     <script src="scripts/videos.js"></script>
+    <script type="module" src="./analytics.js"></script>
 </body>
 
 </html>

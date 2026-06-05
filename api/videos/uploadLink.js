@@ -1,5 +1,18 @@
 import { prisma } from "../../lib/prisma";
 
+function extractYoutubeId(url) {
+
+    const regex =
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/;
+
+    const match =
+        url.match(regex);
+
+    return match
+        ? match[1]
+        : "";
+}
+
 const avatarStyles = [
   'identicon',
   'pixel-art',
@@ -42,6 +55,8 @@ export default async function handler(
                     videoUrl,
                     category: category,
                     type: "youtube",
+                    tumbnailUrl:
+                        `https://img.youtube.com/vi/${extractYoutubeId(videoUrl)}/hqdefault.jpg`,
                     avatar:
                         `https://api.dicebear.com/7.x/${getRandomAvatarStyle(uploader)}/svg?seed=${encodeURIComponent(uploader)}`
                 }
