@@ -4,7 +4,7 @@ import { prisma } from '../lib/prisma';
 // API AVATAR GENERATION
 // =========================
 
-const avatarStyles = ['identicon', 'pixel-art', 'gridy', 'rings', 'thumbs'];
+const avatarStyles = ['identicon', 'pixel-art', 'rings', 'thumbs'];
 
 function getRandomAvatarStyle(name) {
     // Usa el nombre como semilla para consistencia
@@ -41,21 +41,80 @@ export default async function handler(req, res) {
         // GET - Solo mostrar aprovados
         // =========================
         if (req.method === 'GET') {
-            const messages = await prisma.message.findMany({
-                where: {
-                    status: 'approved'  // Solo mostrar aprobados
-                },
-                orderBy: {
-                    createdAt: 'desc'
-                }
+
+            if (req.query.featured === "true") {
+
+                const featured =
+                    await prisma.message.findMany({
+                        where: {
+                            status: "approved"
+                        },
+                        orderBy: {
+                            likes: "desc"
+                        },
+                        take: 3
+                    });
+
+                return res.status(200).json(
+                    featured.map(message => ({
+                        ...message,
+                        time: getRelativeTime(message.createdAt)
+                    }))
+                );
+            }
+
+            const page = parseInt(req.query.page || "1");
+            const limit = parseInt(req.query.limit || "10");
+
+            const sort = req.query.sort || "recent";
+
+            let orderBy = {
+                createdAt: "desc"
+            };
+
+            if (sort === "popular") {
+                orderBy = {
+                    likes: "desc"
+                };
+            }
+
+            if (sort === "oldest") {
+                orderBy = {
+                    createdAt: "asc"
+                };
+            }
+
+            const skip =
+                (page - 1) * limit;
+
+            const messages =
+                await prisma.message.findMany({
+                    where: {
+                        status: "approved"
+                    },
+                    orderBy,
+                    skip,
+                    take: limit
+                });
+
+            const total =
+                await prisma.message.count({
+                    where: {
+                        status: "approved"
+                    }
+                });
+
+            return res.status(200).json({
+                messages: messages.map(message => ({
+                    ...message,
+                    time: getRelativeTime(message.createdAt)
+                })),
+                total,
+                page,
+                limit,
+                hasMore:
+                    skip + messages.length < total
             });
-
-            const formattedMessages = messages.map(message => ({
-                ...message,
-                time: getRelativeTime(message.createdAt)
-            }));
-
-            return res.status(200).json(formattedMessages);
         }
 
         // =========================

@@ -3101,6 +3101,7 @@
     font-weight: 600;
     font-size: 11px;
     color: var(--white);
+    overflow: hidden;
 }
 
 .photo-card-user-info {

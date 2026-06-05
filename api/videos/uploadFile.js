@@ -4,7 +4,6 @@ import { prisma } from "../../lib/prisma";
 const avatarStyles = [
   'identicon',
   'pixel-art',
-  'gridy',
   'rings',
   'thumbs'
 ];
@@ -54,6 +53,8 @@ export default async function handler(
                         `https://api.dicebear.com/7.x/${getRandomAvatarStyle(uploader)}/svg?seed=${encodeURIComponent(uploader)}`,
                     videoUrl:
                         uploaded.url,
+                    tumbnailUrl:
+                        `${uploaded.url}/ik-thumbnail.jpg`,
                     type: "upload"
                 }
             });
