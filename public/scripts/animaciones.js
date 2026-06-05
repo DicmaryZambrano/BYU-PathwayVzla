@@ -714,6 +714,145 @@
         })();*/
 
         // ============================================
+        // PHOTO GALLERY MODAL
+        // ============================================
+        const photoGalleryModal = document.getElementById('photoGalleryModal');
+        const photoModalImg = document.getElementById('photoModalImg');
+        const photoModalDownload = document.getElementById('photoModalDownload');
+        const photoModalHeaderDownload = document.getElementById('pgBtnHeaderDownload');
+        const closePhotoModal = document.getElementById('closePhotoModal');
+        const photoModalOverlay = document.getElementById('photoModalOverlay');
+        const photoModalCounter = document.getElementById('photoModalCounter');
+        
+        const pgBtnPrev = document.getElementById('pgBtnPrev');
+        const pgBtnNext = document.getElementById('pgBtnNext');
+        const pgBtnFullscreen = document.getElementById('pgBtnFullscreen');
+        const pgBtnShare = document.getElementById('pgBtnShare');
+
+        if (photoGalleryModal && photoModalImg) {
+            // Find all gallery images in index.html (only standard gallery images)
+            const galleryImages = document.querySelectorAll('.gallery-img-large:not(.video-thumb) img, .gallery-img-small:not(.video-thumb) img');
+            let currentPhotoIndex = 0;
+            const totalPhotos = galleryImages.length;
+
+            function updateModalImage(index) {
+                if (index < 0 || index >= totalPhotos) return;
+                currentPhotoIndex = index;
+                const activeImg = galleryImages[currentPhotoIndex];
+                const src = activeImg.getAttribute('src');
+                const alt = activeImg.getAttribute('alt') || 'Foto seleccionada';
+                
+                photoModalImg.setAttribute('src', src);
+                photoModalImg.setAttribute('alt', alt);
+                
+                if (photoModalDownload) photoModalDownload.setAttribute('href', src);
+                if (photoModalHeaderDownload) photoModalHeaderDownload.setAttribute('href', src);
+                
+                if (photoModalCounter) {
+                    photoModalCounter.textContent = `Foto ${currentPhotoIndex + 1} de ${totalPhotos}`;
+                }
+            }
+
+            galleryImages.forEach((img, index) => {
+                img.style.cursor = 'pointer'; // Ensure it looks clickable
+                img.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    updateModalImage(index);
+                    photoGalleryModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            function closePhotoModalFunc(e) {
+                if (e) e.preventDefault();
+                photoGalleryModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                
+                // Exit fullscreen if active when closing
+                if (document.fullscreenElement) {
+                    document.exitFullscreen().catch(err => console.log(err));
+                }
+            }
+
+            if (closePhotoModal) closePhotoModal.addEventListener('click', closePhotoModalFunc);
+            if (photoModalOverlay) photoModalOverlay.addEventListener('click', closePhotoModalFunc);
+
+            // Prev / Next Navigation Click
+            if (pgBtnPrev) {
+                pgBtnPrev.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const newIndex = (currentPhotoIndex - 1 + totalPhotos) % totalPhotos;
+                    updateModalImage(newIndex);
+                });
+            }
+
+            if (pgBtnNext) {
+                pgBtnNext.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const newIndex = (currentPhotoIndex + 1) % totalPhotos;
+                    updateModalImage(newIndex);
+                });
+            }
+
+            // Keyboard Navigation (Arrow Keys and Escape)
+            document.addEventListener('keydown', function(e) {
+                if (photoGalleryModal.classList.contains('active')) {
+                    if (e.key === 'ArrowLeft' && pgBtnPrev) {
+                        pgBtnPrev.click();
+                    } else if (e.key === 'ArrowRight' && pgBtnNext) {
+                        pgBtnNext.click();
+                    } else if (e.key === 'Escape') {
+                        closePhotoModalFunc(e);
+                    }
+                }
+            });
+
+            // Fullscreen Functionality
+            if (pgBtnFullscreen) {
+                pgBtnFullscreen.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (!document.fullscreenElement) {
+                        photoGalleryModal.requestFullscreen().catch(err => {
+                            console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                        });
+                    } else {
+                        document.exitFullscreen();
+                    }
+                });
+            }
+
+            // Share Functionality (Copies absolute URL of the image to clipboard)
+            if (pgBtnShare) {
+                pgBtnShare.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const absoluteImgUrl = photoModalImg.src;
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(absoluteImgUrl).then(function() {
+                            const shareSpan = pgBtnShare.querySelector('span');
+                            const originalText = shareSpan.textContent;
+                            shareSpan.textContent = '¡Copiado!';
+                            pgBtnShare.style.borderColor = '#10B981';
+                            pgBtnShare.style.color = '#10B981';
+                            
+                            setTimeout(function() {
+                                shareSpan.textContent = originalText;
+                                pgBtnShare.style.borderColor = '';
+                                pgBtnShare.style.color = '';
+                            }, 2000);
+                        }).catch(err => {
+                            console.error('Could not copy link: ', err);
+                        });
+                    } else {
+                        // Fallback: alert URL
+                        alert(`Enlace de la imagen: ${absoluteImgUrl}`);
+                    }
+                });
+            }
+        }
+
+        // ============================================
         // INFO PAGE ANIMATIONS
         // ============================================
         (function() {
