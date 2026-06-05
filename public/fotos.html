@@ -215,7 +215,6 @@
             </select>
             <select class="filter-select" id="sortSelect">
                 <option value="recent">Más recientes</option>
-                <option value="popular">Más populares</option>
                 <option value="oldest">Más antiguas</option>
             </select>
             <div class="view-toggle">
@@ -247,27 +246,7 @@
 
     <!-- Pagination -->
     <section class="pagination-section">
-        <div class="pagination">
-            <button class="pagination-btn disabled">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" width="16" height="16">
-                    <polyline points="15 18 9 12 15 6" />
-                </svg>
-            </button>
-            <button class="pagination-btn active">1</button>
-            <button class="pagination-btn">2</button>
-            <button class="pagination-btn">3</button>
-            <button class="pagination-btn">4</button>
-            <span class="pagination-ellipsis">...</span>
-            <button class="pagination-btn">11</button>
-            <button class="pagination-btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" width="16" height="16">
-                    <polyline points="9 18 15 12 9 6" />
-                </svg>
-            </button>
-        </div>
-        <button class="btn-load-more">
+        <button class="btn-load-more" onclick="loadMorePhotos()">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -520,6 +499,7 @@
     </div>
     <script src="scripts/gallery.js"></script>
     <script src="scripts/animaciones.js"></script>
+    <script type="module" src="scripts/analytics.js"></script>
 </body>
 
 </html>

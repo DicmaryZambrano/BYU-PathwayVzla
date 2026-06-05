@@ -7,8 +7,15 @@ document.addEventListener("DOMContentLoaded", async() => {
         localStorage.setItem('userId', userId);
     }
 
-    const response = await fetch("/api/messages");
-    let messages = await response.json();
+    let messages = [];
+
+    let currentPage = 1;
+
+    const PAGE_SIZE = 10;
+
+    let currentSort = "recent";
+
+    let hasMore = true;
 
     const messagesList = document.getElementById("messagesList");
     const messagesCount = document.getElementById("messagesCount");
@@ -18,6 +25,303 @@ document.addEventListener("DOMContentLoaded", async() => {
     const nameInput = document.getElementById("nameInput");
     const locationSelect = document.getElementById("locationSelect");
     const anonymousCheck = document.getElementById("anonymousCheck");
+    const btnLoadMore = document.querySelector(".btn-load-more");
+    const sortSelect = document.querySelector(".sort-select");
+    const btnShareLink = document.querySelector('.btn-share-link');
+
+    const charCounter = document.getElementById('charCounter');
+
+    if (messageTextarea && charCounter) {
+        messageTextarea.addEventListener('input', function () {
+            var currentLength = this.value.length;
+            charCounter.textContent = currentLength + '/500';
+            if (currentLength >= 480) {
+                charCounter.style.color = '#ef4444';
+            } else {
+                charCounter.style.color = '';
+            }
+        });
+    }
+
+    async function loadStats() {
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/message-stats"
+                );
+
+            const stats =
+                await response.json();
+
+            document.getElementById(
+                "statMessages"
+            ).textContent =
+                stats.totalMessages;
+
+            document.getElementById(
+                "statLikes"
+            ).textContent =
+                stats.totalLikes;
+
+            document.getElementById(
+                "statParticipants"
+            ).textContent =
+                stats.totalParticipants;
+
+        } catch (error) {
+
+            console.error(
+                "Error loading stats",
+                error
+            );
+        }
+    }
+
+    async function loadMessages(reset = false) {
+        if (reset) {
+
+            currentPage = 1;
+
+            messages = [];
+
+            messagesList.innerHTML = "";
+        }
+
+        const response =
+            await fetch(
+                `/api/messages?page=${currentPage}&limit=${PAGE_SIZE}&sort=${currentSort}`
+            );
+
+        const data =
+            await response.json();
+
+        messages.push(...data.messages);
+
+        hasMore = data.hasMore;
+
+        renderMessages();
+
+        updateLoadMoreButton();
+    }
+
+    async function loadFeaturedMessages() {
+
+    const response =
+        await fetch(
+            "/api/messages?featured=true"
+        );
+
+    const featured =
+        await response.json();
+
+    const featuredContent =
+        document.getElementById(
+            "featuredContent"
+        );
+
+    const sliderDots =
+        document.getElementById(
+            "sliderDots"
+        );
+
+    featuredContent.innerHTML = "";
+
+    sliderDots.innerHTML = "";
+
+    featured.forEach(
+            (message, index) => {
+
+                featuredContent.innerHTML += `
+                    <div
+                        class="featured-item"
+                        style="${
+                            index === 0
+                                ? ""
+                                : "display:none;"
+                        }"
+                    >
+
+                        <div
+                            class="featured-item-top"
+                        >
+
+                            <div
+                                class="message-avatar message-avatar-sm"
+                            >
+
+                                <img
+                                    src="${message.avatar}"
+                                >
+
+                            </div>
+
+                            <div>
+
+                                <h5
+                                    class="featured-name"
+                                >
+                                    ${escapeHtml(
+                                        message.name
+                                    )}
+                                </h5>
+
+                                <span
+                                    class="featured-location"
+                                >
+                                    ${escapeHtml(
+                                        message.location
+                                    )}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <p
+                            class="featured-text"
+                        >
+                            ${escapeHtml(
+                                message.text
+                            )}
+                        </p>
+
+                        <div
+                            class="featured-badge"
+                        >
+                            ⭐
+                            ${message.likes}
+                            reacciones
+                        </div>
+
+                    </div>
+                `;
+
+                sliderDots.innerHTML += `
+                    <span
+                        class="dot ${
+                            index === 0
+                                ? "active"
+                                : ""
+                        }"
+                    ></span>
+                `;
+            });
+
+        initializeFeaturedSlider();
+    }
+
+    function initializeFeaturedSlider() {
+
+        const sliderPrev =
+            document.getElementById(
+                'sliderPrev'
+            );
+
+        const sliderNext =
+            document.getElementById(
+                'sliderNext'
+            );
+
+        const featuredContent =
+            document.getElementById(
+                'featuredContent'
+            );
+
+        const sliderDots =
+            document.getElementById(
+                'sliderDots'
+            );
+
+        let currentSlide = 0;
+
+        function showSlide(index) {
+
+            const items =
+                featuredContent.querySelectorAll(
+                    '.featured-item'
+                );
+
+            const dots =
+                sliderDots.querySelectorAll(
+                    '.dot'
+                );
+
+            items.forEach(
+                (item, i) => {
+
+                    item.style.display =
+                        i === index
+                            ? 'block'
+                            : 'none';
+                }
+            );
+
+            dots.forEach(
+                (dot, i) => {
+
+                    dot.classList.toggle(
+                        'active',
+                        i === index
+                    );
+                }
+            );
+
+            currentSlide = index;
+        }
+
+        sliderPrev.onclick = () => {
+
+            const total =
+                featuredContent.querySelectorAll(
+                    '.featured-item'
+                ).length;
+
+            showSlide(
+                (currentSlide - 1 + total)
+                % total
+            );
+        };
+
+        sliderNext.onclick = () => {
+
+            const total =
+                featuredContent.querySelectorAll(
+                    '.featured-item'
+                ).length;
+
+            showSlide(
+                (currentSlide + 1)
+                % total
+            );
+        };
+    }
+
+    function updateLoadMoreButton() {
+
+        if (!hasMore) {
+
+            btnLoadMore.innerHTML =
+                "No hay más mensajes";
+
+            btnLoadMore.disabled = true;
+
+            return;
+        }
+
+        btnLoadMore.innerHTML = `
+            <svg viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2">
+                <polyline points="6 9 12 15 18 9"/>
+            </svg>
+            Cargar más mensajes
+        `;
+
+        btnLoadMore.disabled = false;
+    }
 
     function renderMessages() {
         messagesList.innerHTML = "";
@@ -76,7 +380,6 @@ document.addEventListener("DOMContentLoaded", async() => {
             messagesList.appendChild(messageCard);
         });
 
-        messagesCount.textContent = messages.length;
         attachLikeHandlers();
     }
 
@@ -181,6 +484,39 @@ document.addEventListener("DOMContentLoaded", async() => {
         return div.innerHTML;
     }
 
+    btnLoadMore.addEventListener(
+        "click",
+        async () => {
+
+            if (!hasMore)
+                return;
+
+            currentPage++;
+
+            await loadMessages();
+        }
+    );
+
+    sortSelect.addEventListener(
+        "change",
+        async () => {
+
+            const value =
+                sortSelect.value;
+
+            if (value === "Más recientes")
+                currentSort = "recent";
+
+            if (value === "Más populares")
+                currentSort = "popular";
+
+            if (value === "Más antiguos")
+                currentSort = "oldest";
+
+            await loadMessages(true);
+        }
+    );
+
     btnSendMessage.addEventListener('click', async (event) => {
         event.preventDefault();
 
@@ -227,20 +563,18 @@ document.addEventListener("DOMContentLoaded", async() => {
 
             const newMessage = await response.json();
 
-            // Agregar arriba del feed
-            messages.unshift(newMessage);
-
             // Render
-            renderMessages();
+            await loadMessages(true);
+
+            charCounter.textContent = '0/500';
+
+            await loadStats();
 
             // Reset form
             messageTextarea.value = '';
             nameInput.value = '';
             locationSelect.selectedIndex = 0;
             anonymousCheck.checked = false;
-
-            // Reset counter
-            document.getElementById('charCounter').textContent = '0/500';
 
         } catch (error) {
 
@@ -261,5 +595,23 @@ document.addEventListener("DOMContentLoaded", async() => {
         }
     });
 
-    renderMessages();
+    if (btnShareLink) {
+        btnShareLink.addEventListener('click', function () {
+            const currentUrl = window.location.href;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(currentUrl).then(function () {
+                    btnShareLink.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> ¡Enlace copiado!';
+                    setTimeout(function () {
+                        btnShareLink.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg> Compartir enlace';
+                    }, 2000);
+                });
+            }
+        });
+    }
+
+    await loadMessages(true);
+
+    await loadFeaturedMessages();
+
+    await loadStats();
 });

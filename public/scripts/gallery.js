@@ -1,25 +1,81 @@
-async function loadPhotos() {
+let currentPage = 1;
+let hasMore = true;
+
+let currentSearch = "";
+let currentCategory = "all";
+let currentSort = "recent";
+
+async function loadPhotos(
+    reset = false
+) {
 
     try {
 
-        const response =
-            await fetch("/api/photos");
+        if (reset) {
 
-        const photos =
+            currentPage = 1;
+
+            document.getElementById(
+                "photosGrid"
+            ).innerHTML = "";
+        }
+
+        const response =
+            await fetch(
+                `/api/photos?page=${currentPage}&limit=12&search=${encodeURIComponent(currentSearch)}&category=${currentCategory}&sort=${currentSort}`
+            );
+
+        const data =
             await response.json();
 
-        const grid =
-            document.getElementById("photosGrid");
+        hasMore =
+            data.hasMore;
 
-        grid.innerHTML = photos.map(photo => `
+        renderPhotos(
+            data.photos,
+            !reset
+        );
 
+        updateLoadMoreButton();
+
+    } catch(error) {
+
+        console.error(error);
+    }
+}
+
+function renderPhotos(
+    photos,
+    append = false
+) {
+
+    const grid =
+        document.getElementById(
+            "photosGrid"
+        );
+
+    if (!append) {
+        grid.innerHTML = "";
+    }
+
+    photos.forEach(photo => {
+
+        grid.insertAdjacentHTML(
+            "beforeend",
+            `
             <div class="photo-card fade-in visible">
 
                 <div class="photo-card-image">
-                    <img src="${photo.imageUrl}" alt="${photo.title}">
+
+                    <img
+                        src="${photo.imageUrl}"
+                        alt="${photo.title}"
+                    >
+
                     <span class="photo-badge">
                         ${photo.category || "General"}
                     </span>
+
                 </div>
 
                 <div class="photo-card-content">
@@ -31,13 +87,18 @@ async function loadPhotos() {
                     <div class="photo-card-user">
 
                         <div class="photo-card-avatar">
-                            <img src="${photo.avatar}" alt="${photo.uploader}">
+                            <img
+                                src="${photo.avatar}"
+                                alt="${photo.uploader}"
+                            >
                         </div>
 
                         <div class="photo-card-user-info">
+
                             <span class="photo-card-user-name">
                                 ${photo.uploader}
                             </span>
+
                         </div>
 
                     </div>
@@ -45,15 +106,83 @@ async function loadPhotos() {
                 </div>
 
             </div>
-
-        `).join("");
-
-    } catch (error) {
-
-        console.error(error);
-
-    }
+            `
+        );
+    });
 }
+
+document
+    .getElementById("searchInput")
+    .addEventListener(
+        "input",
+        filterPhotos
+    );
+
+document
+    .getElementById("categorySelect")
+    .addEventListener(
+        "change",
+        filterPhotos
+    );
+
+document
+    .getElementById("sortSelect")
+    .addEventListener(
+        "change",
+        filterPhotos
+    );
+
+function filterPhotos() {
+
+    currentSearch =
+        document.getElementById(
+            "searchInput"
+        ).value;
+
+    currentCategory =
+        document.getElementById(
+            "categorySelect"
+        ).value;
+
+    currentSort =
+        document.getElementById(
+            "sortSelect"
+        ).value;
+
+    loadPhotos(true);
+}
+
+function loadMorePhotos() {
+
+    if (!hasMore) return;
+
+    currentPage++;
+
+    loadPhotos();
+}
+
+function updateLoadMoreButton() {
+
+    const button =
+        document.querySelector(
+            ".btn-load-more"
+        );
+
+    if (!button) return;
+
+    button.style.display =
+        hasMore
+            ? "flex"
+            : "none";
+}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        loadPhotos(true);
+    }
+);
 
 let selectedFile = null;
 
@@ -64,6 +193,8 @@ const photoInput =
     document.getElementById("photoInput");
 
 uploadBtn.addEventListener("click", () => {
+
+    return; // Deshabilitado temporalmente
 
     photoInput.click();
 
