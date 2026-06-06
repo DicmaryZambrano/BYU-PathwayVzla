@@ -16,7 +16,6 @@ function extractYoutubeId(url) {
 const avatarStyles = [
   'identicon',
   'pixel-art',
-  'gridy',
   'rings',
   'thumbs'
 ];
