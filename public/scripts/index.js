@@ -337,13 +337,16 @@ document.addEventListener(
                 const response =
                     await fetch('/api/photos');
 
-                const photos =
+                const data =
                     await response.json();
 
-                if (!photos.length) return;
+                const photos =
+                    data.photos;
+
+                if (!photos || photos.length === 0) return;
 
                 const selected =
-                    getRandomItems(photos, 3);
+                    getRandomItems(photos, Math.min(3, photos.length));
 
                 const photoIds = [
                     "homePhoto1",
@@ -375,13 +378,16 @@ document.addEventListener(
                 const response =
                     await fetch('/api/videos');
 
-                const videos =
+                const data =
                     await response.json();
 
-                if (!videos.length) return;
+                const videos =
+                    data.videos;
+
+                if (!videos || videos.length === 0) return;
 
                 const selected =
-                    getRandomItems(videos, 3);
+                    getRandomItems(videos, Math.min(3, videos.length));
 
                 const videoIds = [
                     "homeVideo1",
