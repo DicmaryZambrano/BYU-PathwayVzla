@@ -55,7 +55,9 @@
                 <a href="info.html">Acerca de</a>
                 <a href="#" class="live-link">En Vivo</a>
             </nav>
-            <button class="header-cta" id="headerCta" onclick="document.getElementById('uploadVideoInput').click()">
+            <!-- Desabilitado temporalmente-->
+            <!--button class="header-cta" id="headerCta" onclick="document.getElementById('videoInput').click()"-->
+            <button class="header-cta upload-btn-trigger" id="headerCta">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -81,7 +83,11 @@
         <a href="mensajes.html">Mensajes</a>
         <a href="info.html">Acerca de</a>
         <a href="#">En Vivo</a>
-        <a href="#" onclick="document.getElementById('uploadVideoInput').click()"
+        <!--a href="#" onclick="document.getElementById('videoInput').click()"
+            style="background: var(--blue-dark); color: white; text-align: center; margin-top: 10px;">
+            Subir Video ↑
+        </a-->
+        <a href="#" class="upload-btn-trigger"
             style="background: var(--blue-dark); color: white; text-align: center; margin-top: 10px;">
             Subir Video ↑
         </a>
@@ -125,10 +131,12 @@
                 </div>
                 <div class="upload-intro-text">
                     <h3>Comparte tu video</h3>
-                    <p>Sube tu video o comparte el enlace de YouTube o Vimeo para que todos puedan disfrutarlo.</p>
+                    <p>Sube tu video o comparte el enlace de YouTube para que todos puedan disfrutarlo.</p>
                 </div>
             </div>
-            <div class="upload-btn-card" onclick="document.getElementById('uploadVideoInput').click()">
+            <!-- deshabilitado temporalmente -->
+            <!-- <div class="upload-btn-card" onclick="document.getElementById('videoInput').click()"> -->
+            <div class="upload-btn-card upload-btn-trigger">
                 <svg class="upload-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -136,23 +144,28 @@
                     <line x1="12" y1="3" x2="12" y2="15" />
                 </svg>
                 <span class="btn-main-text">Subir video</span>
-                <span class="btn-sub-text">MP4, MOV hasta 20MB</span>
+                <span class="btn-sub-text">MP4, MOV hasta 8MB</span>
             </div>
             <div class="upload-divider">o</div>
-            <div class="upload-link-card" onclick="showLinkModal()">
+            <div class="upload-link-card upload-btn-trigger" onclick="showLinkModal()">
                 <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
                     <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
                 </svg>
                 <span class="btn-main-text">Agregar enlace</span>
-                <span class="btn-sub-text">YouTube, Vimeo</span>
+                <span class="btn-sub-text">YouTube</span>
             </div>
         </div>
+            <!-- Hidden file input -->
+            <input
+            type="file"
+            id="videoInput"
+            accept="video/*"
+            style="display:none;"
+            onchange="handleVideoFile(event)"
+            >
     </section>
-
-    <!-- Hidden file input -->
-    <input type="file" id="uploadVideoInput" accept="video/*" style="display:none;" onchange="handleVideoUpload(this)">
 
     <!-- FILTERS BAR (Videos Page Specific) -->
     <section class="filters-section-videos">
@@ -167,15 +180,14 @@
             </div>
             <select class="filter-select" id="sortSelect" onchange="filterVideos()">
                 <option value="recent">Más recientes</option>
-                <option value="popular">Más populares</option>
                 <option value="oldest">Más antiguos</option>
             </select>
             <select class="filter-select" id="categorySelect" onchange="filterVideos()">
                 <option value="all">Todas las categorías</option>
-                <option value="ceremony">Ceremonia</option>
-                <option value="moments">Momentos</option>
-                <option value="speeches">Discursos</option>
-                <option value="celebrations">Celebraciones</option>
+                <option value="ceremonia">Ceremonia</option>
+                <option value="momentos">Momentos</option>
+                <option value="discursos">Discursos</option>
+                <option value="celebraciones">Celebraciones</option>
             </select>
             <div class="view-toggle">
                 <button class="view-btn active" id="gridViewBtn" onclick="setView('grid')">
@@ -205,401 +217,6 @@
     <!-- VIDEOS GRID -->
     <section class="videos-section">
         <div class="videos-grid" id="videosGrid">
-            <!-- Video Card 1 -->
-            <div class="video-card" data-category="ceremony" data-date="2024-05-12" data-likes="128">
-                <div class="video-thumbnail" onclick="openVideoModal('Resumen de la Ceremonia 2024')">
-                    <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/1012ac41f-4342-4ed6-a5c9-76559818bc30.png"
-                        alt="Resumen de la Ceremonia 2024">
-                    <div class="video-play-overlay">
-                        <div class="play-button">
-                            <svg viewBox="0 0 24 24" fill="white">
-                                <polygon points="5 3 19 12 5 21 5 3" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="video-duration">02:45</span>
-                </div>
-                <div class="video-content">
-                    <h3 class="video-title">Resumen de la Ceremonia 2024</h3>
-                    <p class="video-meta">by <span class="author">Juan Pérez</span> · 12 May 2024</p>
-                    <div class="video-footer">
-                        <div class="video-reactions">
-                            <div class="reaction-item like" data-count="128" data-liked="false">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                </svg>
-                                <span class="likes-count">128</span>
-                            </div>
-                            <div class="reaction-item comment">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                </svg>
-                                <span>24</span>
-                            </div>
-                        </div>
-                        <button class="video-menu-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <circle cx="12" cy="5" r="2" />
-                                <circle cx="12" cy="12" r="2" />
-                                <circle cx="12" cy="19" r="2" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video Card 2 -->
-            <div class="video-card" data-category="moments" data-date="2024-05-11" data-likes="96">
-                <div class="video-thumbnail" onclick="openVideoModal('Momentos Inolvidables')">
-                    <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/186dff940-2adc-41d5-86b5-5a5849e7052d.png"
-                        alt="Momentos Inolvidables">
-                    <div class="video-play-overlay">
-                        <div class="play-button">
-                            <svg viewBox="0 0 24 24" fill="white">
-                                <polygon points="5 3 19 12 5 21 5 3" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="video-duration">01:32</span>
-                </div>
-                <div class="video-content">
-                    <h3 class="video-title">Momentos Inolvidables</h3>
-                    <p class="video-meta">by <span class="author">María González</span> · 11 May 2024</p>
-                    <div class="video-footer">
-                        <div class="video-reactions">
-                            <div class="reaction-item like" data-count="96" data-liked="false">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                </svg>
-                                <span class="likes-count">96</span>
-                            </div>
-                            <div class="reaction-item comment">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                </svg>
-                                <span>18</span>
-                            </div>
-                        </div>
-                        <button class="video-menu-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <circle cx="12" cy="5" r="2" />
-                                <circle cx="12" cy="12" r="2" />
-                                <circle cx="12" cy="19" r="2" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video Card 3 -->
-            <div class="video-card" data-category="moments" data-date="2024-05-10" data-likes="142">
-                <div class="video-thumbnail" onclick="openVideoModal('Historias que Inspiran')">
-                    <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/1b2f9e0e9-bdcd-4722-8ed4-11eeb42caa91.png"
-                        alt="Historias que Inspiran">
-                    <div class="video-play-overlay">
-                        <div class="play-button">
-                            <svg viewBox="0 0 24 24" fill="white">
-                                <polygon points="5 3 19 12 5 21 5 3" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="video-duration">03:15</span>
-                </div>
-                <div class="video-content">
-                    <h3 class="video-title">Historias que Inspiran</h3>
-                    <p class="video-meta">by <span class="author">Andrea López</span> · 10 May 2024</p>
-                    <div class="video-footer">
-                        <div class="video-reactions">
-                            <div class="reaction-item like" data-count="142" data-liked="false">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                </svg>
-                                <span class="likes-count">142</span>
-                            </div>
-                            <div class="reaction-item comment">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                </svg>
-                                <span>31</span>
-                            </div>
-                        </div>
-                        <button class="video-menu-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <circle cx="12" cy="5" r="2" />
-                                <circle cx="12" cy="12" r="2" />
-                                <circle cx="12" cy="19" r="2" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video Card 4 -->
-            <div class="video-card" data-category="moments" data-date="2024-05-09" data-likes="87">
-                <div class="video-thumbnail" onclick="openVideoModal('Detrás de cada logro')">
-                    <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/142a2f644-c727-4272-937f-ee052c325608.png"
-                        alt="Detrás de cada logro">
-                    <div class="video-play-overlay">
-                        <div class="play-button">
-                            <svg viewBox="0 0 24 24" fill="white">
-                                <polygon points="5 3 19 12 5 21 5 3" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="video-duration">02:10</span>
-                </div>
-                <div class="video-content">
-                    <h3 class="video-title">Detrás de cada logro</h3>
-                    <p class="video-meta">by <span class="author">Luis Martínez</span> · 09 May 2024</p>
-                    <div class="video-footer">
-                        <div class="video-reactions">
-                            <div class="reaction-item like" data-count="87" data-liked="false">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                </svg>
-                                <span class="likes-count">87</span>
-                            </div>
-                            <div class="reaction-item comment">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                </svg>
-                                <span>15</span>
-                            </div>
-                        </div>
-                        <button class="video-menu-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <circle cx="12" cy="5" r="2" />
-                                <circle cx="12" cy="12" r="2" />
-                                <circle cx="12" cy="19" r="2" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video Card 5 -->
-            <div class="video-card" data-category="ceremony" data-date="2024-05-08" data-likes="110">
-                <div class="video-thumbnail" onclick="openVideoModal('Orgullosos de ser BYU-Pathway')">
-                    <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/16f490748-6b90-4f02-922b-0d70431973b4.png"
-                        alt="Orgullosos de ser BYU-Pathway">
-                    <div class="video-play-overlay">
-                        <div class="play-button">
-                            <svg viewBox="0 0 24 24" fill="white">
-                                <polygon points="5 3 19 12 5 21 5 3" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="video-duration">01:50</span>
-                </div>
-                <div class="video-content">
-                    <h3 class="video-title">Orgullosos de ser BYU-Pathway</h3>
-                    <p class="video-meta">by <span class="author">BYU-Pathway Venezuela</span> · 08 May 2024</p>
-                    <div class="video-footer">
-                        <div class="video-reactions">
-                            <div class="reaction-item like" data-count="110" data-liked="false">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                </svg>
-                                <span class="likes-count">110</span>
-                            </div>
-                            <div class="reaction-item comment">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                </svg>
-                                <span>22</span>
-                            </div>
-                        </div>
-                        <button class="video-menu-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <circle cx="12" cy="5" r="2" />
-                                <circle cx="12" cy="12" r="2" />
-                                <circle cx="12" cy="19" r="2" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video Card 6 -->
-            <div class="video-card" data-category="celebrations" data-date="2024-05-07" data-likes="75">
-                <div class="video-thumbnail" onclick="openVideoModal('Un nuevo comienzo')">
-                    <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/1012ac41f-4342-4ed6-a5c9-76559818bc30.png"
-                        alt="Un nuevo comienzo">
-                    <div class="video-play-overlay">
-                        <div class="play-button">
-                            <svg viewBox="0 0 24 24" fill="white">
-                                <polygon points="5 3 19 12 5 21 5 3" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="video-duration">02:38</span>
-                </div>
-                <div class="video-content">
-                    <h3 class="video-title">Un nuevo comienzo</h3>
-                    <p class="video-meta">by <span class="author">Familia Rodríguez</span> · 07 May 2024</p>
-                    <div class="video-footer">
-                        <div class="video-reactions">
-                            <div class="reaction-item like" data-count="75" data-liked="false">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                </svg>
-                                <span class="likes-count">75</span>
-                            </div>
-                            <div class="reaction-item comment">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                </svg>
-                                <span>12</span>
-                            </div>
-                        </div>
-                        <button class="video-menu-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <circle cx="12" cy="5" r="2" />
-                                <circle cx="12" cy="12" r="2" />
-                                <circle cx="12" cy="19" r="2" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video Card 7 -->
-            <div class="video-card" data-category="speeches" data-date="2024-05-06" data-likes="156">
-                <div class="video-thumbnail" onclick="openVideoModal('Discurso de Graduación 2024')">
-                    <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/186dff940-2adc-41d5-86b5-5a5849e7052d.png"
-                        alt="Discurso de Graduación 2024">
-                    <div class="video-play-overlay">
-                        <div class="play-button">
-                            <svg viewBox="0 0 24 24" fill="white">
-                                <polygon points="5 3 19 12 5 21 5 3" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="video-duration">04:20</span>
-                </div>
-                <div class="video-content">
-                    <h3 class="video-title">Discurso de Graduación 2024</h3>
-                    <p class="video-meta">by <span class="author">BYU-Pathway Venezuela</span> · 06 May 2024</p>
-                    <div class="video-footer">
-                        <div class="video-reactions">
-                            <div class="reaction-item like" data-count="156" data-liked="false">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                </svg>
-                                <span class="likes-count">156</span>
-                            </div>
-                            <div class="reaction-item comment">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                </svg>
-                                <span>28</span>
-                            </div>
-                        </div>
-                        <button class="video-menu-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <circle cx="12" cy="5" r="2" />
-                                <circle cx="12" cy="12" r="2" />
-                                <circle cx="12" cy="19" r="2" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video Card 8 -->
-            <div class="video-card" data-category="celebrations" data-date="2024-05-05" data-likes="90">
-                <div class="video-thumbnail" onclick="openVideoModal('Celebración con amigos y familia')">
-                    <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/1b2f9e0e9-bdcd-4722-8ed4-11eeb42caa91.png"
-                        alt="Celebración con amigos y familia">
-                    <div class="video-play-overlay">
-                        <div class="play-button">
-                            <svg viewBox="0 0 24 24" fill="white">
-                                <polygon points="5 3 19 12 5 21 5 3" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="video-duration">03:05</span>
-                </div>
-                <div class="video-content">
-                    <h3 class="video-title">Celebración con amigos y familia</h3>
-                    <p class="video-meta">by <span class="author">Carlos Ramírez</span> · 05 May 2024</p>
-                    <div class="video-footer">
-                        <div class="video-reactions">
-                            <div class="reaction-item like" data-count="90" data-liked="false">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                </svg>
-                                <span class="likes-count">90</span>
-                            </div>
-                            <div class="reaction-item comment">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                </svg>
-                                <span>17</span>
-                            </div>
-                        </div>
-                        <button class="video-menu-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <circle cx="12" cy="5" r="2" />
-                                <circle cx="12" cy="12" r="2" />
-                                <circle cx="12" cy="19" r="2" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Video Card 9 -->
-            <div class="video-card" data-category="moments" data-date="2024-05-04" data-likes="64">
-                <div class="video-thumbnail" onclick="openVideoModal('Hasta Pronto')">
-                    <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/142a2f644-c727-4272-937f-ee052c325608.png"
-                        alt="Hasta Pronto">
-                    <div class="video-play-overlay">
-                        <div class="play-button">
-                            <svg viewBox="0 0 24 24" fill="white">
-                                <polygon points="5 3 19 12 5 21 5 3" />
-                            </svg>
-                        </div>
-                    </div>
-                    <span class="video-duration">02:38</span>
-                </div>
-                <div class="video-content">
-                    <h3 class="video-title">Hasta Pronto</h3>
-                    <p class="video-meta">by <span class="author">Sofía Navarro</span> · 04 May 2024</p>
-                    <div class="video-footer">
-                        <div class="video-reactions">
-                            <div class="reaction-item like" data-count="64" data-liked="false">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                </svg>
-                                <span class="likes-count">64</span>
-                            </div>
-                            <div class="reaction-item comment">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                                </svg>
-                                <span>9</span>
-                            </div>
-                        </div>
-                        <button class="video-menu-btn">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <circle cx="12" cy="5" r="2" />
-                                <circle cx="12" cy="12" r="2" />
-                                <circle cx="12" cy="19" r="2" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -788,7 +405,7 @@
     </div>
 
     <!-- VIDEO PLAYBACK MODAL -->
-    <div class="video-modal" id="videoModal">
+    <!--div class="video-modal" id="videoModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeVideoModal()">&times;</button>
             <div class="modal-video-container">
@@ -802,10 +419,32 @@
                 </div>
             </div>
         </div>
+    </div-->
+
+    <div
+        class="video-modal"
+        id="videoModal"
+    >
+
+        <div class="modal-content">
+
+            <button
+                class="modal-close"
+                onclick="closeVideoModal()"
+            >
+                &times;
+            </button>
+
+            <div id="modalVideoContent">
+
+            </div>
+
+        </div>
+
     </div>
 
     <!-- ADD LINK MODAL -->
-    <div class="video-modal" id="linkModal">
+    <!--div class="video-modal" id="linkModal">
         <div class="modal-content"
             style="max-width:500px;background:white;padding:36px;border-radius:var(--radius-lg);">
             <button class="modal-close" onclick="closeLinkModal()" style="color:#1f2937;">&times;</button>
@@ -819,6 +458,279 @@
             <button onclick="submitLink()"
                 style="width:100%;height:52px;background:var(--blue-dark);color:white;border:none;border-radius:10px;font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;cursor:pointer;transition:var(--transition);">Agregar
                 video</button>
+        </div>
+    </div-->
+
+    <!-- MODAL VIDEOS -->
+    <div id="uploadVideoModal" class="upload-modal">
+
+        <div class="upload-modal-content">
+
+            <button
+                type="button"
+                id="closeUploadVideoModal"
+                class="upload-modal-close"
+                aria-label="Cerrar modal"
+            >
+                &times;
+            </button>
+
+            <div class="upload-modal-header">
+
+                <div class="upload-modal-icon">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <polygon
+                            points="5 3 19 12 5 21 5 3"
+                            fill="currentColor"
+                        />
+                    </svg>
+
+                </div>
+
+                <h3>
+                    Compartir Video
+                </h3>
+
+                <p>
+                    Comparte un recuerdo especial de graduación
+                    con toda la comunidad.
+                </p>
+
+            </div>
+
+            <div class="video-preview-container">
+
+                <video
+                    id="previewVideo"
+                    class="preview-video"
+                    controls
+                ></video>
+
+            </div>
+
+            <form id="videoForm">
+
+                <div class="upload-form-group">
+
+                    <label>
+                        Categoría
+                    </label>
+
+                    <select
+                        id="videoCategory"
+                        required
+                    >
+                        <option value="">
+                            Selecciona una categoría
+                        </option>
+
+                        <option value="ceremonia">
+                            Ceremonia
+                        </option>
+
+                        <option value="momentos">
+                            Momentos
+                        </option>
+
+                        <option value="discursos">
+                            Discursos
+                        </option>
+
+                        <option value="celebraciones">
+                            Celebraciones
+                        </option>
+                    </select>
+
+                </div>
+
+                <div class="upload-form-group">
+
+                    <label>
+                        Tu nombre
+                    </label>
+
+                    <input
+                        type="text"
+                        id="videoUploaderName"
+                        placeholder="Nombre del graduado"
+                        required
+                    >
+
+                </div>
+
+                <div class="upload-form-group">
+
+                    <label>
+                        Título
+                    </label>
+
+                    <input
+                        type="text"
+                        id="videoTitle"
+                        placeholder="Título del video"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="upload-submit-btn"
+                >
+                    Compartir Video
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div
+        id="linkModal"
+        class="upload-modal"
+    >
+
+        <div class="upload-modal-content">
+
+            <button
+                class="upload-modal-close"
+                onclick="closeLinkModal()"
+            >
+                &times;
+            </button>
+
+            <div class="upload-modal-header">
+
+                <div class="upload-modal-icon">
+
+                    <svg viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                    </svg>
+
+                </div>
+
+                <h3>Compartir Video</h3>
+
+                <p>
+                    Agrega un enlace de YouTube para compartirlo con toda la comunidad.
+                </p>
+
+            </div>
+
+            <div class="upload-form-group">
+
+                <label>
+                    Categoría
+                </label>
+
+                <select
+                    id="linkVideoCategory"
+                    required
+                >
+                    <option value="">
+                        Selecciona una categoría
+                    </option>
+
+                    <option value="ceremonia">
+                        Ceremonia
+                    </option>
+
+                    <option value="momentos">
+                        Momentos
+                    </option>
+
+                    <option value="discursos">
+                        Discursos
+                    </option>
+
+                    <option value="celebraciones">
+                        Celebraciones
+                    </option>
+
+                </select>
+
+            </div>
+
+            <div class="upload-form-group">
+
+                <label>
+                    Enlace del video
+                </label>
+
+                <input
+                    type="url"
+                    id="videoLink"
+                    placeholder="https://youtube.com/watch?v=..."
+                >
+
+            </div>
+
+            <div class="upload-form-group">
+
+                <label>
+                    Título
+                </label>
+
+                <input
+                    type="text"
+                    id="linkVideoTitle"
+                    placeholder="Título del video"
+                >
+
+            </div>
+
+            <div class="upload-form-group">
+
+                <label>
+                    Tu nombre
+                </label>
+
+                <input
+                    type="text"
+                    id="linkUploader"
+                    placeholder="Nombre del graduado"
+                >
+
+            </div>
+
+            <button
+                class="upload-submit-btn"
+                onclick="submitVideoLink()"
+            >
+                Compartir Video
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL FUNCIÓN DESACTIVADA (DISABLED FUNCTION MODAL) -->
+    <div id="disabledFunctionModal" class="disabled-modal" role="dialog" aria-labelledby="disabledModalTitle" aria-hidden="true">
+        <div class="disabled-modal-overlay" id="disabledModalOverlay"></div>
+        <div class="disabled-modal-container">
+            <button class="disabled-modal-close" id="closeDisabledModal" aria-label="Cerrar modal">&times;</button>
+            <div class="disabled-modal-body">
+                <div class="disabled-modal-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
+                <h3 id="disabledModalTitle" class="disabled-modal-title">Función No Disponible</h3>
+                <p class="disabled-modal-text">Esta función actualmente está desactivada</p>
+                <button class="disabled-modal-btn" id="confirmDisabledModal">Entendido</button>
+            </div>
         </div>
     </div>
 

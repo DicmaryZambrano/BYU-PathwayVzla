@@ -279,14 +279,14 @@
                 </div>
                 <div class="gallery-images">
                     <div class="gallery-img-large">
-                        <img src="images/ref1.jpg" alt="Graduados BYU Pathway Venezuela" loading="lazy">
+                        <img id="homePhoto1" src="images/ref1.jpg" alt="Graduados BYU Pathway Venezuela" loading="lazy">
                     </div>
                     <div class="gallery-img-small">
-                        <img src="images/ref2.jpg" alt="Celebraciòn de graduación" loading="lazy"
+                        <img id="homePhoto2" src="images/ref2.jpg" alt="Celebraciòn de graduación" loading="lazy"
                             style="object-position: top;">
                     </div>
                     <div class="gallery-img-small">
-                        <img src="images/ref3.jpg" alt="Graduandos felices" loading="lazy"
+                        <img id="homePhoto3" src="images/ref3.jpg" alt="Graduandos felices" loading="lazy"
                             style="object-position: center;">
                     </div>
                 </div>
@@ -309,7 +309,7 @@
                 </div>
                 <div class="gallery-images">
                     <div class="gallery-img-large video-thumb">
-                        <img src="images/vid1.jpg" alt="Videos de graduación" loading="lazy">
+                        <img id="homeVideo1" src="images/vid1.jpg" alt="Videos de graduación" loading="lazy">
                         <div class="video-play-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -318,7 +318,7 @@
                         </div>
                     </div>
                     <div class="gallery-img-small video-thumb">
-                        <img src="images/vid2.jpg" alt="Video graduación" loading="lazy" style="object-position: top;">
+                        <img id="homeVideo2" src="images/vid2.jpg" alt="Video graduación" loading="lazy" style="object-position: top;">
                         <div class="video-play-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round">
@@ -327,7 +327,7 @@
                         </div>
                     </div>
                     <div class="gallery-img-small video-thumb">
-                        <img src="images/vid3.jpg" alt="Video celebración" loading="lazy"
+                        <img id="homeVideo3" src="images/vid3.jpg" alt="Video celebración" loading="lazy"
                             style="object-position: center;">
                         <div class="video-play-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -494,81 +494,6 @@
 
             <!-- Messages List -->
             <div class="messages-list fade-in-right" id="messagesList" data-max-messages="3">
-                <div class="message-card fade-in">
-                    <div class="message-card-top">
-                        <div class="message-avatar">
-                            <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/16f490748-6b90-4f02-922b-0d70431973b4.png" alt="María González">
-                        </div>
-                        <div class="message-card-content">
-                            <div class="message-card-header">
-                                <div>
-                                    <h5 class="message-name">María González</h5>
-                                    <span class="message-location">Caracas, Venezuela</span>
-                                </div>
-                                <div class="message-card-actions">
-                                    <span class="message-time">Hace 2 horas</span>
-                                    <button class="message-like-btn" data-liked="false" data-count="12">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                        </svg>
-                                        <span class="likes-count">12</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <p class="message-text">¡Felicidades a todos los graduados! Su esfuerzo y dedicación son inspiradores.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-card fade-in">
-                    <div class="message-card-top">
-                        <div class="message-avatar">
-                            <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/142a2f644-c727-4272-937f-ee052c325608.png" alt="Juan Perez">
-                        </div>
-                        <div class="message-card-content">
-                            <div class="message-card-header">
-                                <div>
-                                    <h5 class="message-name">Juan Perez</h5>
-                                    <span class="message-location">Maracaibo, Venezuela</span>
-                                </div>
-                                <div class="message-card-actions">
-                                    <span class="message-time">Hace 4 horas</span>
-                                    <button class="message-like-btn" data-liked="false" data-count="8">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                        </svg>
-                                        <span class="likes-count">8</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <p class="message-text">Dios los bendiga en esta nueva etapa. ¡Mucho Exito en todo lo que viene!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="message-card fade-in">
-                    <div class="message-card-top">
-                        <div class="message-avatar">
-                            <img src="https://image.qwenlm.ai/public_source/c18da45d-c2ad-400f-a2dd-d8c3b6cd6c88/1b2f9e0e9-bdcd-4722-8ed4-11eeb42caa91.png" alt="Familia Rodríguez">
-                        </div>
-                        <div class="message-card-content">
-                            <div class="message-card-header">
-                                <div>
-                                    <h5 class="message-name">Familia Rodríguez</h5>
-                                    <span class="message-location">Valencia, Venezuela</span>
-                                </div>
-                                <div class="message-card-actions">
-                                    <span class="message-time">Hace 6 horas</span>
-                                    <button class="message-like-btn" data-liked="false" data-count="15">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                                        </svg>
-                                        <span class="likes-count">15</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <p class="message-text">¡Estamos muy orgullosos de ustedes! Este es solo el comienzo de cosas increíbles. </p>
-                        </div>
-                    </div>
-                </div>
                 <div class="messages-view-more">
                     <a href="mensajes.html">Ver más mensajes</a>
                 </div>
@@ -821,6 +746,7 @@
     </div>
 
     <script src="scripts/animaciones.js"></script>
+    <script src="scripts/index.js"></script>
 </body>
 
 </html>
