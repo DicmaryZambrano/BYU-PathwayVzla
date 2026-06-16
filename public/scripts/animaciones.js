@@ -979,7 +979,7 @@
             var liveLinks = document.querySelectorAll('.live-link');
             
             // Live Video URL (with autoplay parameter)
-            var liveVideoSrc = "https://www.youtube.com/embed/4qXOCUMqiNU?autoplay=1";
+            var liveVideoSrc = "https://www.youtube.com/live/ANIHJQM5vkM";
 
             function openModal(e) {
                 if (e) e.preventDefault();
