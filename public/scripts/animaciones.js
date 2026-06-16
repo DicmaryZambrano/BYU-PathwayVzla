@@ -973,71 +973,67 @@
             'use strict';
             
             var liveVideoModal = document.getElementById('liveVideoModal');
-            var liveYoutubePlayer = document.getElementById('liveYoutubePlayer');
+            var liveYoutubePlayer = document.getElementById('liveYoutubePlayer'); // Este debe ser tu <iframe>
             var closeLiveModal = document.getElementById('closeLiveModal');
             var liveModalOverlay = document.getElementById('liveModalOverlay');
             var liveLinks = document.querySelectorAll('.live-link');
             
-            // Live Video URL (with autoplay parameter)
-            var liveVideoSrc = "https://www.youtube.com/live/ANIHJQM5vkM?autoplay=1&mute=1";
+            // URL de Embed correcta (con parámetros de autoplay y mute para que funcione en navegadores modernos)
+            var liveVideoSrc = "https://www.youtube.com/embed/ANIHJQM5vkM?autoplay=1&mute=1";
 
             function openModal(e) {
                 if (e) e.preventDefault();
                 if (!liveVideoModal || !liveYoutubePlayer) return;
                 
-                // Set YouTube URL with autoplay
+                // Asignar el src al iframe
                 liveYoutubePlayer.setAttribute('src', liveVideoSrc);
                 
-                // Show modal with animation
+                // Mostrar modal con animación
                 liveVideoModal.style.display = 'flex';
-                // Trigger transition reflow
+                // Forzar un reflow para que la transición CSS funcione correctamente
                 liveVideoModal.offsetHeight; 
                 liveVideoModal.classList.add('active');
                 
-                // Disable background scrolling
+                // Deshabilitar el scroll de fondo
                 document.body.style.overflow = 'hidden';
             }
 
             function closeModal() {
                 if (!liveVideoModal || !liveYoutubePlayer) return;
                 
-                // Remove active class to trigger fadeout/scale down
+                // Quitar clase activa para la animación de salida
                 liveVideoModal.classList.remove('active');
                 
-                // Wait for the transition to finish before hiding the display and clearing the src
+                // Esperar a que termine la transición para ocultar el modal y limpiar el src
                 setTimeout(function () {
                     liveVideoModal.style.display = 'none';
-                    // CRITICAL: Clear the iframe src to stop the YouTube video playing immediately
+                    // CRÍTICO: Limpiar el src detiene el video y el audio de YouTube
                     liveYoutubePlayer.setAttribute('src', '');
-                }, 400); // matches the 0.4s transition defined in CSS
+                }, 400); // 400ms coinciden con tu transición en CSS
                 
-                // Restore scrolling
+                // Restaurar el scroll
                 document.body.style.overflow = 'auto';
             }
 
-            // Attach event listeners to all 'En Vivo' links
+            // Eventos
             liveLinks.forEach(function (link) {
                 link.addEventListener('click', openModal);
             });
 
-            // Close modal on close button click
             if (closeLiveModal) {
                 closeLiveModal.addEventListener('click', closeModal);
             }
 
-            // Close modal on background overlay click
             if (liveModalOverlay) {
                 liveModalOverlay.addEventListener('click', closeModal);
             }
 
-            // Close modal on Escape key press
             document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape' && liveVideoModal && liveVideoModal.classList.contains('active')) {
                     closeModal();
                 }
             });
         })();
-
         
         // ============================================
         // DISABLED FUNCTION MODAL ("SUBIR CONTENIDO")
