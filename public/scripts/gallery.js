@@ -5,6 +5,40 @@ let currentSearch = "";
 let currentCategory = "all";
 let currentSort = "recent";
 
+async function downloadFile(url) {
+
+    try {
+
+        const response =
+            await fetch(url);
+
+        const blob =
+            await response.blob();
+
+        const blobUrl =
+            URL.createObjectURL(blob);
+
+        const link =
+            document.createElement("a");
+
+        link.href = blobUrl;
+        link.download =
+            url.split("/").pop().split("?")[0];
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(blobUrl);
+
+    } catch (error) {
+
+        console.error(error);
+
+        window.open(url, "_blank");
+    }
+}
+
 async function loadPhotos(
     reset = false
 ) {
@@ -75,6 +109,20 @@ function renderPhotos(
                     <span class="photo-badge">
                         ${photo.category || "General"}
                     </span>
+
+                    <a
+                        href="${photo.imageUrl}"
+                        class="photo-download-btn"
+                        title="Descargar foto"
+                        aria-label="Descargar foto"
+                        onclick="event.preventDefault(); downloadFile('${photo.imageUrl}')"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                    </a>
 
                 </div>
 
@@ -193,8 +241,6 @@ const photoInput =
     document.getElementById("photoInput");
 
 uploadBtn.addEventListener("click", () => {
-
-    return; // Deshabilitado temporalmente
 
     photoInput.click();
 

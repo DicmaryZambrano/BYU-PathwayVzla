@@ -375,6 +375,32 @@
     background: rgba(0, 0, 0, 0.1);
 }
 
+.video-download-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 50%;
+    color: var(--blue-dark, #0A3D6D);
+    transition: var(--transition);
+    z-index: 2;
+}
+
+.video-download-btn:hover {
+    background: var(--blue-dark, #0A3D6D);
+    color: #fff;
+}
+
+.video-download-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
 .play-button {
     width: 74px;
     height: 74px;

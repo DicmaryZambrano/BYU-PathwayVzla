@@ -26,5 +26,10 @@
     "bcryptjs": "^3.0.3",
     "imagekit": "^6.0.0",
     "prisma": "^6.19.0"
+  },
+  "allowScripts": {
+    "@prisma/client@6.19.0": true,
+    "@prisma/engines@6.19.3": true,
+    "prisma@6.19.3": true
   }
 }

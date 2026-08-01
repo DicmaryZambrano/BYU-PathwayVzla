@@ -1,3 +1,37 @@
+async function downloadFile(url) {
+
+    try {
+
+        const response =
+            await fetch(url);
+
+        const blob =
+            await response.blob();
+
+        const blobUrl =
+            URL.createObjectURL(blob);
+
+        const link =
+            document.createElement("a");
+
+        link.href = blobUrl;
+        link.download =
+            url.split("/").pop().split("?")[0];
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        URL.revokeObjectURL(blobUrl);
+
+    } catch (error) {
+
+        console.error(error);
+
+        window.open(url, "_blank");
+    }
+}
+
 function fileToBase64(file) {
 
     return new Promise(
@@ -165,6 +199,22 @@ function renderVideos(
                             </svg>
                         </div>
                     </div>
+
+                    ${video.type !== "youtube" ? `
+                    <a
+                        href="${video.videoUrl}"
+                        class="video-download-btn"
+                        title="Descargar video"
+                        aria-label="Descargar video"
+                        onclick="event.stopPropagation(); event.preventDefault(); downloadFile('${video.videoUrl}')"
+                    >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                    </a>
+                    ` : ""}
 
                 </div>
 
@@ -419,9 +469,9 @@ function openVideoModal(video) {
             ?
             `
             <a
-                href="${video.videoUrl}?download=true"
-                download
+                href="${video.videoUrl}"
                 class="download-video-btn"
+                onclick="event.preventDefault(); downloadFile('${video.videoUrl}')"
             >
                 ⬇ Descargar video
             </a>
@@ -502,7 +552,6 @@ function closeVideoModal() {
 }
 
 function showLinkModal() {
-    return; // Deshabilitado temporalmente
     document
         .getElementById("linkModal")
         .classList.add("active");
