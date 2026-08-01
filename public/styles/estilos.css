@@ -3038,6 +3038,7 @@
     position: relative;
     height: 260px;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .photo-card-image img {

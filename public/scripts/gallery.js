@@ -78,6 +78,8 @@ async function loadPhotos(
     }
 }
 
+let loadedPhotos = [];
+
 function renderPhotos(
     photos,
     append = false
@@ -90,16 +92,20 @@ function renderPhotos(
 
     if (!append) {
         grid.innerHTML = "";
+        loadedPhotos = [];
     }
 
     photos.forEach(photo => {
+
+        const photoIndex =
+            loadedPhotos.push(photo) - 1;
 
         grid.insertAdjacentHTML(
             "beforeend",
             `
             <div class="photo-card fade-in visible">
 
-                <div class="photo-card-image">
+                <div class="photo-card-image" data-photo-index="${photoIndex}">
 
                     <img
                         src="${photo.imageUrl}"
@@ -115,7 +121,7 @@ function renderPhotos(
                         class="photo-download-btn"
                         title="Descargar foto"
                         aria-label="Descargar foto"
-                        onclick="event.preventDefault(); downloadFile('${photo.imageUrl}')"
+                        onclick="event.preventDefault(); event.stopPropagation(); downloadFile('${photo.imageUrl}')"
                     >
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -158,6 +164,27 @@ function renderPhotos(
         );
     });
 }
+
+document
+    .getElementById("photosGrid")
+    .addEventListener("click", (e) => {
+
+        const card =
+            e.target.closest(".photo-card-image");
+
+        if (!card || !window.openPhotoGalleryModal) return;
+
+        const index =
+            parseInt(card.dataset.photoIndex, 10);
+
+        window.openPhotoGalleryModal(
+            loadedPhotos.map(photo => ({
+                src: photo.imageUrl,
+                alt: photo.title
+            })),
+            index
+        );
+    });
 
 document
     .getElementById("searchInput")

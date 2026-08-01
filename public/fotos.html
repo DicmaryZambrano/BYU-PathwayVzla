@@ -497,6 +497,93 @@
         </div>
 
     </div>
+
+    <!-- MODAL FOTO GALERIA (PHOTO GALLERY MODAL) -->
+    <div id="photoGalleryModal" class="photo-gallery-modal" role="dialog" aria-hidden="true">
+        <div class="pg-modal-overlay" id="photoModalOverlay"></div>
+        <div class="pg-modal-container">
+            <!-- Header -->
+            <div class="pg-modal-header">
+                <div class="pg-header-left">
+                    <div class="pg-header-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                            <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                        </svg>
+                    </div>
+                    <span class="pg-header-title">Galería de Graduación 2026</span>
+                </div>
+                <div class="pg-header-right">
+                    <a href="" download class="pg-ctrl-btn" id="pgBtnHeaderDownload" aria-label="Descargar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                    </a>
+                    <button class="pg-ctrl-btn" id="pgBtnFullscreen" aria-label="Pantalla completa">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+                        </svg>
+                    </button>
+                    <button class="pg-ctrl-btn" id="closePhotoModal" aria-label="Cerrar modal">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Central Body -->
+            <div class="pg-modal-body">
+                <button class="pg-nav-btn prev" id="pgBtnPrev" aria-label="Anterior">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                </button>
+
+                <div class="pg-image-container">
+                    <img id="photoModalImg" src="" alt="Foto seleccionada">
+                </div>
+
+                <button class="pg-nav-btn next" id="pgBtnNext" aria-label="Siguiente">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <div class="pg-modal-footer">
+                <div class="pg-footer-left">
+                    <h3 class="pg-footer-title">Ceremonia de Graduación 2026</h3>
+                    <span class="pg-footer-counter" id="photoModalCounter">Foto 0 de 0</span>
+                </div>
+                <div class="pg-footer-right">
+                    <button class="pg-action-btn outline" id="pgBtnShare">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3" />
+                            <circle cx="6" cy="12" r="3" />
+                            <circle cx="18" cy="19" r="3" />
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                        </svg>
+                        <span>Compartir</span>
+                    </button>
+                    <a id="photoModalDownload" href="" download class="pg-action-btn solid">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        <span>Descargar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         window.va = window.va || function () {
             (window.vaq = window.vaq || []).push(arguments);

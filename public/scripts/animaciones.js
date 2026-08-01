@@ -730,45 +730,82 @@
         const pgBtnFullscreen = document.getElementById('pgBtnFullscreen');
         const pgBtnShare = document.getElementById('pgBtnShare');
 
+        async function downloadGalleryFile(url) {
+            try {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                const blobUrl = URL.createObjectURL(blob);
+
+                const link = document.createElement('a');
+                link.href = blobUrl;
+                link.download = url.split('/').pop().split('?')[0];
+
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                URL.revokeObjectURL(blobUrl);
+            } catch (error) {
+                console.error(error);
+                window.open(url, '_blank');
+            }
+        }
+
         if (photoGalleryModal && photoModalImg) {
             // Find all gallery images in index.html (only standard gallery images)
-            const galleryImages = document.querySelectorAll('.gallery-img-large:not(.video-thumb) img, .gallery-img-small:not(.video-thumb) img');
+            let galleryImages = Array.from(
+                document.querySelectorAll('.gallery-img-large:not(.video-thumb) img, .gallery-img-small:not(.video-thumb) img')
+            ).map(function (img) {
+                return {
+                    src: img.getAttribute('src'),
+                    alt: img.getAttribute('alt') || 'Foto seleccionada'
+                };
+            });
             let currentPhotoIndex = 0;
-            const totalPhotos = galleryImages.length;
 
             function updateModalImage(index) {
-                if (index < 0 || index >= totalPhotos) return;
+                if (index < 0 || index >= galleryImages.length) return;
                 currentPhotoIndex = index;
-                const activeImg = galleryImages[currentPhotoIndex];
-                const src = activeImg.getAttribute('src');
-                const alt = activeImg.getAttribute('alt') || 'Foto seleccionada';
-                
-                photoModalImg.setAttribute('src', src);
-                photoModalImg.setAttribute('alt', alt);
-                
-                if (photoModalDownload) photoModalDownload.setAttribute('href', src);
-                if (photoModalHeaderDownload) photoModalHeaderDownload.setAttribute('href', src);
-                
+                const active = galleryImages[currentPhotoIndex];
+
+                photoModalImg.setAttribute('src', active.src);
+                photoModalImg.setAttribute('alt', active.alt);
+
+                if (photoModalDownload) photoModalDownload.setAttribute('href', active.src);
+                if (photoModalHeaderDownload) photoModalHeaderDownload.setAttribute('href', active.src);
+
                 if (photoModalCounter) {
-                    photoModalCounter.textContent = `Foto ${currentPhotoIndex + 1} de ${totalPhotos}`;
+                    photoModalCounter.textContent = `Foto ${currentPhotoIndex + 1} de ${galleryImages.length}`;
                 }
             }
 
-            galleryImages.forEach((img, index) => {
-                img.style.cursor = 'pointer'; // Ensure it looks clickable
-                img.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    updateModalImage(index);
-                    photoGalleryModal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
+            function openPhotoModalAt(index) {
+                updateModalImage(index);
+                photoGalleryModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            document.querySelectorAll('.gallery-img-large:not(.video-thumb) img, .gallery-img-small:not(.video-thumb) img')
+                .forEach((img, index) => {
+                    img.style.cursor = 'pointer'; // Ensure it looks clickable
+                    img.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        openPhotoModalAt(index);
+                    });
                 });
-            });
+
+            // Lets other scripts (e.g. a dynamically-loaded photo grid) open this same modal
+            // with their own list of photos: window.openPhotoGalleryModal([{src, alt}, ...], startIndex)
+            window.openPhotoGalleryModal = function (images, startIndex) {
+                galleryImages = images;
+                openPhotoModalAt(startIndex || 0);
+            };
 
             function closePhotoModalFunc(e) {
                 if (e) e.preventDefault();
                 photoGalleryModal.classList.remove('active');
                 document.body.style.overflow = 'auto';
-                
+
                 // Exit fullscreen if active when closing
                 if (document.fullscreenElement) {
                     document.exitFullscreen().catch(err => console.log(err));
@@ -778,12 +815,20 @@
             if (closePhotoModal) closePhotoModal.addEventListener('click', closePhotoModalFunc);
             if (photoModalOverlay) photoModalOverlay.addEventListener('click', closePhotoModalFunc);
 
+            [photoModalDownload, photoModalHeaderDownload].forEach(function (btn) {
+                if (!btn) return;
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    downloadGalleryFile(photoModalImg.getAttribute('src'));
+                });
+            });
+
             // Prev / Next Navigation Click
             if (pgBtnPrev) {
                 pgBtnPrev.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    const newIndex = (currentPhotoIndex - 1 + totalPhotos) % totalPhotos;
+                    const newIndex = (currentPhotoIndex - 1 + galleryImages.length) % galleryImages.length;
                     updateModalImage(newIndex);
                 });
             }
@@ -792,7 +837,7 @@
                 pgBtnNext.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
-                    const newIndex = (currentPhotoIndex + 1) % totalPhotos;
+                    const newIndex = (currentPhotoIndex + 1) % galleryImages.length;
                     updateModalImage(newIndex);
                 });
             }
