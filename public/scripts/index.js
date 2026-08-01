@@ -403,6 +403,18 @@ document.addEventListener(
                     if (img) {
                         img.src = video.thumbnailUrl;
                     }
+
+                    const thumb =
+                        img && img.closest(".video-thumb");
+
+                    if (thumb) {
+                        thumb.style.cursor = "pointer";
+                        thumb.addEventListener("click", () => {
+                            if (window.openVideoGalleryModal) {
+                                window.openVideoGalleryModal(selected, index);
+                            }
+                        });
+                    }
                 });
 
             } catch (error) {

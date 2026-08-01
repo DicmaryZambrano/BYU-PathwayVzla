@@ -899,6 +899,168 @@
         }
 
         // ============================================
+        // VIDEO GALLERY MODAL
+        // ============================================
+        const videoGalleryModal = document.getElementById('videoGalleryModal');
+        const videoModalPlayer = document.getElementById('videoModalPlayer');
+        const videoModalTitle = document.getElementById('videoModalTitle');
+        const videoModalCounter = document.getElementById('videoModalCounter');
+        const videoModalDownload = document.getElementById('videoModalDownload');
+        const closeVideoGalleryModal = document.getElementById('closeVideoGalleryModal');
+        const videoModalOverlay = document.getElementById('videoModalOverlay');
+
+        const vgBtnPrev = document.getElementById('vgBtnPrev');
+        const vgBtnNext = document.getElementById('vgBtnNext');
+        const vgBtnFullscreen = document.getElementById('vgBtnFullscreen');
+        const vgBtnShare = document.getElementById('vgBtnShare');
+
+        if (videoGalleryModal && videoModalPlayer) {
+
+            function extractYoutubeId(url) {
+                const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/;
+                const match = url.match(regex);
+                return match ? match[1] : '';
+            }
+
+            let galleryVideos = [];
+            let currentVideoIndex = 0;
+
+            function renderCurrentVideo() {
+                const video = galleryVideos[currentVideoIndex];
+                if (!video) return;
+
+                let player = '';
+                if (video.type === 'youtube') {
+                    const videoId = extractYoutubeId(video.videoUrl);
+                    player = `<iframe width="100%" height="500" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+                } else {
+                    player = `<video controls autoplay width="100%"><source src="${video.videoUrl}" type="video/mp4"></video>`;
+                }
+
+                videoModalPlayer.innerHTML = player;
+
+                if (videoModalTitle) videoModalTitle.textContent = video.title || 'Video';
+                if (videoModalCounter) videoModalCounter.textContent = `Video ${currentVideoIndex + 1} de ${galleryVideos.length}`;
+
+                if (videoModalDownload) {
+                    if (video.type !== 'youtube') {
+                        videoModalDownload.style.display = '';
+                        videoModalDownload.setAttribute('href', video.videoUrl);
+                    } else {
+                        videoModalDownload.style.display = 'none';
+                    }
+                }
+            }
+
+            function openVideoModalAt(index) {
+                currentVideoIndex = index;
+                renderCurrentVideo();
+                videoGalleryModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            // Lets other scripts (video gallery grid, homepage preview) open this
+            // modal with their own list of videos: window.openVideoGalleryModal([video, ...], startIndex)
+            window.openVideoGalleryModal = function (videos, startIndex) {
+                galleryVideos = videos;
+                openVideoModalAt(startIndex || 0);
+            };
+
+            function closeVideoModalFunc(e) {
+                if (e) e.preventDefault();
+                videoModalPlayer.innerHTML = '';
+                videoGalleryModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+
+                if (document.fullscreenElement) {
+                    document.exitFullscreen().catch(err => console.log(err));
+                }
+            }
+
+            if (closeVideoGalleryModal) closeVideoGalleryModal.addEventListener('click', closeVideoModalFunc);
+            if (videoModalOverlay) videoModalOverlay.addEventListener('click', closeVideoModalFunc);
+
+            if (vgBtnPrev) {
+                vgBtnPrev.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const newIndex = (currentVideoIndex - 1 + galleryVideos.length) % galleryVideos.length;
+                    openVideoModalAt(newIndex);
+                });
+            }
+
+            if (vgBtnNext) {
+                vgBtnNext.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const newIndex = (currentVideoIndex + 1) % galleryVideos.length;
+                    openVideoModalAt(newIndex);
+                });
+            }
+
+            document.addEventListener('keydown', function (e) {
+                if (videoGalleryModal.classList.contains('active')) {
+                    if (e.key === 'ArrowLeft' && vgBtnPrev) {
+                        vgBtnPrev.click();
+                    } else if (e.key === 'ArrowRight' && vgBtnNext) {
+                        vgBtnNext.click();
+                    } else if (e.key === 'Escape') {
+                        closeVideoModalFunc(e);
+                    }
+                }
+            });
+
+            if (vgBtnFullscreen) {
+                vgBtnFullscreen.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (!document.fullscreenElement) {
+                        videoGalleryModal.requestFullscreen().catch(err => {
+                            console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                        });
+                    } else {
+                        document.exitFullscreen();
+                    }
+                });
+            }
+
+            if (vgBtnShare) {
+                vgBtnShare.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const video = galleryVideos[currentVideoIndex];
+                    const shareUrl = video && video.type === 'youtube' ? video.videoUrl : window.location.href;
+
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(shareUrl).then(function () {
+                            const shareSpan = vgBtnShare.querySelector('span');
+                            const originalText = shareSpan.textContent;
+                            shareSpan.textContent = '¡Copiado!';
+                            vgBtnShare.style.borderColor = '#10B981';
+                            vgBtnShare.style.color = '#10B981';
+
+                            setTimeout(function () {
+                                shareSpan.textContent = originalText;
+                                vgBtnShare.style.borderColor = '';
+                                vgBtnShare.style.color = '';
+                            }, 2000);
+                        }).catch(err => {
+                            console.error('Could not copy link: ', err);
+                        });
+                    } else {
+                        alert(`Enlace del video: ${shareUrl}`);
+                    }
+                });
+            }
+
+            if (videoModalDownload) {
+                videoModalDownload.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const video = galleryVideos[currentVideoIndex];
+                    if (video) downloadGalleryFile(video.videoUrl);
+                });
+            }
+        }
+
+        // ============================================
         // INFO PAGE ANIMATIONS
         // ============================================
         (function() {

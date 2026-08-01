@@ -147,6 +147,8 @@ async function loadVideos(reset = false) {
     }
 }
 
+let loadedVideos = [];
+
 function renderVideos(
     videos,
     append = false
@@ -159,9 +161,13 @@ function renderVideos(
 
     if (!append) {
         grid.innerHTML = "";
+        loadedVideos = [];
     }
 
     videos.forEach(video => {
+
+        const videoIndex =
+            loadedVideos.push(video) - 1;
 
         const date =
             new Date(video.createdAt)
@@ -184,7 +190,7 @@ function renderVideos(
 
                 <div
                     class="video-thumbnail"
-                    onclick='openVideoModal(${JSON.stringify(video)})'
+                    data-video-index="${videoIndex}"
                 >
 
                     <img
@@ -244,6 +250,21 @@ function renderVideos(
         );
     });
 }
+
+document
+    .getElementById("videosGrid")
+    .addEventListener("click", (e) => {
+
+        const thumbnail =
+            e.target.closest(".video-thumbnail");
+
+        if (!thumbnail || !window.openVideoGalleryModal) return;
+
+        const index =
+            parseInt(thumbnail.dataset.videoIndex, 10);
+
+        window.openVideoGalleryModal(loadedVideos, index);
+    });
 
 function loadMoreVideos() {
 
@@ -421,135 +442,6 @@ async function submitVideoLink() {
     }
 }
 
-function openVideoModal(video) {
-
-    const modal =
-        document.getElementById("videoModal");
-
-    const content =
-        document.getElementById(
-            "modalVideoContent"
-        );
-
-    let videoPlayer = "";
-
-    if(video.type === "youtube") {
-
-        const videoId =
-            extractYoutubeId(
-                video.videoUrl
-            );
-
-        videoPlayer = `
-            <iframe
-                width="100%"
-                height="500"
-                src="https://www.youtube.com/embed/${videoId}"
-                frameborder="0"
-                allowfullscreen>
-            </iframe>
-        `;
-
-    } else {
-
-        videoPlayer = `
-            <video
-                controls
-                autoplay
-                width="100%">
-                <source
-                    src="${video.videoUrl}"
-                    type="video/mp4">
-            </video>
-        `;
-    }
-
-    const downloadButton =
-        video.type !== "youtube"
-            ?
-            `
-            <a
-                href="${video.videoUrl}"
-                class="download-video-btn"
-                onclick="event.preventDefault(); downloadFile('${video.videoUrl}')"
-            >
-                ⬇ Descargar video
-            </a>
-            `
-            :
-            "";
-
-    content.innerHTML = `
-
-        <div class="video-modal-header">
-
-            <div class="video-modal-user">
-
-                <img
-                    src="${video.avatar}"
-                    alt="${video.uploader}"
-                    class="video-modal-avatar"
-                >
-
-                <div>
-
-                    <h3 class="video-modal-title">
-                        ${video.title}
-                    </h3>
-
-                    <p class="video-modal-meta">
-                        ${video.uploader}
-                    </p>
-
-                    <span class="video-modal-category">
-                        ${video.category || "General"}
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="video-modal-player">
-
-            ${videoPlayer}
-
-        </div>
-
-        <div class="video-modal-actions">
-
-            ${downloadButton}
-
-        </div>
-
-    `;
-
-    modal.classList.add("active");
-
-    document.body.style.overflow =
-        "hidden";
-}
-
-function closeVideoModal() {
-
-    const modal =
-        document.getElementById(
-            "videoModal"
-        );
-
-    const content =
-        document.getElementById(
-            "modalVideoContent"
-        );
-
-    content.innerHTML = "";
-
-    modal.classList.remove("active");
-
-    document.body.style.overflow =
-        "auto";
-}
 
 function showLinkModal() {
     document
@@ -602,18 +494,5 @@ uploadVideoModal.addEventListener(
         }
     }
 );
-
-document
-    .getElementById("videoModal")
-    .addEventListener(
-        "click",
-        function(e) {
-
-            if(e.target === this) {
-
-                closeVideoModal();
-            }
-        }
-    );
 
 loadVideos(true);

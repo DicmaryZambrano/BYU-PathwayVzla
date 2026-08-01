@@ -402,43 +402,80 @@
         </div>
     </div>
 
-    <!-- VIDEO PLAYBACK MODAL -->
-    <!--div class="video-modal" id="videoModal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeVideoModal()">&times;</button>
-            <div class="modal-video-container">
-                <div id="modalVideoContent"
-                    style="display:flex;align-items:center;justify-content:center;height:100%;background:#091e36;color:white;flex-direction:column;gap:16px;">
-                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                        style="opacity:0.6; color: var(--yellow-gold)">
-                        <polygon points="5 3 19 12 5 21 5 3" />
+    <!-- MODAL GALERÍA DE VIDEOS (VIDEO GALLERY MODAL) -->
+    <div id="videoGalleryModal" class="photo-gallery-modal" role="dialog" aria-hidden="true">
+        <div class="pg-modal-overlay" id="videoModalOverlay"></div>
+        <div class="pg-modal-container">
+            <!-- Header -->
+            <div class="pg-modal-header">
+                <div class="pg-header-left">
+                    <div class="pg-header-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                    </div>
+                    <span class="pg-header-title">Galería de Videos 2026</span>
+                </div>
+                <div class="pg-header-right">
+                    <button class="pg-ctrl-btn" id="vgBtnFullscreen" aria-label="Pantalla completa">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+                        </svg>
+                    </button>
+                    <button class="pg-ctrl-btn" id="closeVideoGalleryModal" aria-label="Cerrar modal">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18" />
+                            <line x1="6" y1="6" x2="18" y2="18" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Central Body -->
+            <div class="pg-modal-body">
+                <button class="pg-nav-btn prev" id="vgBtnPrev" aria-label="Anterior">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6" />
                     </svg>
-                    <p style="font-size:18px;opacity:0.9;" id="modalVideoTitle">Reproduciendo video...</p>
+                </button>
+
+                <div class="pg-image-container" id="videoModalPlayer"></div>
+
+                <button class="pg-nav-btn next" id="vgBtnNext" aria-label="Siguiente">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <div class="pg-modal-footer">
+                <div class="pg-footer-left">
+                    <h3 class="pg-footer-title" id="videoModalTitle">Video</h3>
+                    <span class="pg-footer-counter" id="videoModalCounter">Video 0 de 0</span>
+                </div>
+                <div class="pg-footer-right">
+                    <button class="pg-action-btn outline" id="vgBtnShare">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3" />
+                            <circle cx="6" cy="12" r="3" />
+                            <circle cx="18" cy="19" r="3" />
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                        </svg>
+                        <span>Compartir</span>
+                    </button>
+                    <a id="videoModalDownload" href="" class="pg-action-btn solid">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        <span>Descargar</span>
+                    </a>
                 </div>
             </div>
         </div>
-    </div-->
-
-    <div
-        class="video-modal"
-        id="videoModal"
-    >
-
-        <div class="modal-content">
-
-            <button
-                class="modal-close"
-                onclick="closeVideoModal()"
-            >
-                &times;
-            </button>
-
-            <div id="modalVideoContent">
-
-            </div>
-
-        </div>
-
     </div>
 
     <!-- ADD LINK MODAL -->
