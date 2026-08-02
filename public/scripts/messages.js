@@ -101,6 +101,10 @@ document.addEventListener("DOMContentLoaded", async() => {
 
         hasMore = data.hasMore;
 
+        if (messagesCount) {
+            messagesCount.textContent = data.total;
+        }
+
         renderMessages();
 
         updateLoadMoreButton();

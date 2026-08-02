@@ -39,6 +39,36 @@ async function downloadFile(url) {
     }
 }
 
+async function loadPhotoStats() {
+
+    try {
+
+        const response =
+            await fetch("/api/photos/stats");
+
+        const stats =
+            await response.json();
+
+        const heroStatPhotos =
+            document.getElementById("heroStatPhotos");
+
+        const heroStatGraduates =
+            document.getElementById("heroStatGraduates");
+
+        if (heroStatPhotos) {
+            heroStatPhotos.textContent = stats.totalPhotos;
+        }
+
+        if (heroStatGraduates) {
+            heroStatGraduates.textContent = stats.totalUploaders;
+        }
+
+    } catch (error) {
+
+        console.error(error);
+    }
+}
+
 async function loadPhotos(
     reset = false
 ) {
@@ -256,6 +286,8 @@ document.addEventListener(
     () => {
 
         loadPhotos(true);
+
+        loadPhotoStats();
     }
 );
 
