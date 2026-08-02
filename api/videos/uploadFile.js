@@ -53,7 +53,7 @@ export default async function handler(
                         `https://api.dicebear.com/7.x/${getRandomAvatarStyle(uploader)}/svg?seed=${encodeURIComponent(uploader)}`,
                     videoUrl:
                         uploaded.url,
-                    tumbnailUrl:
+                    thumbnailUrl:
                         `${uploaded.url}/ik-thumbnail.jpg`,
                     type: "upload"
                 }
