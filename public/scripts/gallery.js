@@ -52,15 +52,8 @@ async function loadPhotoStats() {
         const heroStatPhotos =
             document.getElementById("heroStatPhotos");
 
-        const heroStatGraduates =
-            document.getElementById("heroStatGraduates");
-
         if (heroStatPhotos) {
             heroStatPhotos.textContent = stats.totalPhotos;
-        }
-
-        if (heroStatGraduates) {
-            heroStatGraduates.textContent = stats.totalUploaders;
         }
 
     } catch (error) {
